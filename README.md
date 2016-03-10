@@ -11,10 +11,13 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Just wait for a moment~
 
 # RecyclerView , ListView , GrideView
+* RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
+* AdapterHelper and Adapter for ListView and GridView
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/grid.PNG)
 
 # ExpandableListView
+* ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/expandable.PNG)
 
@@ -22,7 +25,7 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Currently, don't do getItemView().setTag() ,because ItemView tag has be set to retain Helper object .
 
 # Dependencies
-* Glide-3.7.0.jar ==  For load url image , of course you can replace it with other image load library .
+* Glide-3.7.0.jar （for loadding url image , of course you can replace it with other image loading library)
 
 #Thanks
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .

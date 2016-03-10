@@ -2,6 +2,11 @@
 A quick adapter library for ListView , GridView , RecyclerView and ExpandableListView on android. 
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/example.gif)
+# Features
+* Based on template type
+* Simple and clean api
+* Super esay to use and Much less code
+
 # Maven
 * Just wait for a moment~
 

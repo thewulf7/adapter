@@ -1,11 +1,9 @@
 # QuickAdapter
 A quick adapter library for ListView , GridView , RecyclerView and ExpandableListView on android. 
 <p>
-Example
-<p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/example.gif)
-# Maven Central
-* await...
+# Maven
+* Just wait for a moment~
 
 # RecyclerView , ListView , GrideView
 <p>

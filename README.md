@@ -1,6 +1,9 @@
 # QuickAdapter
 A quick adapter library for ListView , GridView , RecyclerView and ExpandableListView on android. 
 
+# Maven Central
+* await...
+
 # RecyclerView , ListView , GrideView
 * Generate map objects(tables and data views) from an existing sqlite file
 * Generate API to read/write sqlite (insert,update,delete,query and so on)
@@ -21,5 +24,5 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Glide-3.7.0.jar == for load url image , of course you can replace it with other image load library .
 
 #Thanks
-* Repository is inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) and modifies from it.
+* Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) and based on it .
 * Thanks JoaZapata(https://github.com/JoanZapata) for his greate job .

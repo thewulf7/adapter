@@ -25,7 +25,8 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Currently, don't do getItemView().setTag() ,because ItemView tag has be set to retain Helper object .
 
 # Dependencies
-* Glide-3.7.0.jar （for loadding url image , of course you can replace it with other image loading library)
+* compile 'com.github.bumptech.glide:glide:3.7.0'  
+ (of course you can replace it with other image loading library)
 
 #Thanks
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .

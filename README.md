@@ -1,6 +1,7 @@
 # Adapter
 A quick adapter library for ListView , GridView , RecyclerView and ExpandableListView on android. 
-[![jCenter](https://img.shields.io/badge/JitPack.io-3.0.0beta5-red.svg?style=flat)](https://bintray.com/thepacific/maven/adapter/view) 
+<p>
+[ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/example.gif)
 # Features

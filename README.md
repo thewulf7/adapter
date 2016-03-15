@@ -8,7 +8,7 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Super esay to use and Much less code
 
 # Gradle
-* compile 'com.github.thepacific:adapter:1.0.0'
+* compile 'com.github.thepacific:adapter:1.0.0'  
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
@@ -26,7 +26,7 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 
 # Dependencies
 * compile 'com.github.bumptech.glide:glide:3.7.0'  
-  =====of course you can replace it with other image loading library======
+  of course you can replace it with other image loading library
 
 #Thanks
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .

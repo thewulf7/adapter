@@ -7,8 +7,8 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Simple and clean api
 * Super esay to use and Much less code
 
-# Maven
-* Just wait for a moment~
+# Gradle
+* compile 'com.github.thepacific:adapter:1.0.0'
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView

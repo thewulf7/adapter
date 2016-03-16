@@ -29,8 +29,10 @@ compile 'com.github.thepacific:adapter:1.0.3'
 * Currently, don't do getItemView().setTag() ,because ItemView tag has be set to retain Helper object .
 
 # Dependencies
-* compile 'com.github.bumptech.glide:glide:3.7.0'  
-  of course you can replace it with other image loading library
+```groovy
+// You can replace it with other image loading library
+compile 'com.github.bumptech.glide:glide:3.7.0'
+```
 
 #Thanks
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .

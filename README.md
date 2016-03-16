@@ -1,14 +1,18 @@
 # Adapter
 A quick adapter library for ListView , GridView , RecyclerView and ExpandableListView on android. 
 <p>
+[ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
+<p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/example.gif)
 # Features
 * Based on template type
 * Simple and clean api
 * Super esay to use and Much less code
 
-# Maven
-* Just wait for a moment~
+# Gradle
+```groovy
+compile 'com.github.thepacific:adapter:1.0.3'
+```
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
@@ -26,7 +30,7 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 
 # Dependencies
 * compile 'com.github.bumptech.glide:glide:3.7.0'  
-  Of course you can replace it with other image loading library
+  of course you can replace it with other image loading library
 
 #Thanks
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .

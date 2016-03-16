@@ -10,9 +10,9 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Super esay to use and Much less code
 
 # Gradle
-<p>
-<h3>compile 'com.github.thepacific:adapter:1.0.3'</h3>
-<p>
+```groovy
+compile 'com.github.thepacific:adapter:1.0.3'
+```
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView

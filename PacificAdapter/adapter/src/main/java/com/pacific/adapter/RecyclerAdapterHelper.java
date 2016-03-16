@@ -13,12 +13,6 @@ final public class RecyclerAdapterHelper extends BaseAdapterHelper<RecyclerAdapt
         this.views = new SparseArray<>();
     }
 
-    /**
-     * This method is the only entry point to get a RecyclerAdapterHelper.
-     *
-     * @param viewHolder The viewHolder arg passed to the onBindViewHolder() method.
-     * @return A RecyclerAdapterHelper instance.
-     */
     static RecyclerAdapterHelper get(ViewHolder viewHolder) {
         RecyclerAdapterHelper helper;
         if (viewHolder.itemView.getTag() == null) {
@@ -30,9 +24,6 @@ final public class RecyclerAdapterHelper extends BaseAdapterHelper<RecyclerAdapt
         return helper;
     }
 
-    /**
-     * Retrieve the itemView
-     */
     @Override
     public View getItemView() {
         return viewHolder.itemView;

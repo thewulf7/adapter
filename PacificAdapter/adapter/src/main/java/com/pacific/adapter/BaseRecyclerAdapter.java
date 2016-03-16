@@ -9,13 +9,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Abstraction class of a BaseAdapter in which you only need
- * to provide the convert() implementation.<br/>
- * Using the provided RecycleAdapterHelper, your code is minimalist.
- *
- * @param <T> The type of the items in the list.
- */
 abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends RecyclerView.Adapter<ViewHolder> implements DataIO<T> {
 
     protected final Context context;

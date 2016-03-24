@@ -8,10 +8,11 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Based on template type
 * Simple and clean api
 * Super esay to use and Much less code
+
 ## BaseAdapterHelper
 
 * ```setText()``` Calls ```setText(String)``` on any TextView.
-* ```setAlpha()``` Calls ```setAlpha(float)``` on any View.
+* * ```setAlpha()``` Calls ```setAlpha(float)``` on any View.
 * ```setVisible()``` Calls ```setVisibility(int)``` on any View.
 * ```linkify()``` Calls ```Linkify.addLinks(view, ALL)``` on any TextView.
 * ```setTypeface()``` Calls ```setTypeface(Typeface)``` on any TextView.

@@ -8,6 +8,26 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * Based on template type
 * Simple and clean api
 * Super esay to use and Much less code
+## BaseAdapterHelper
+
+* ```setText()``` Calls ```setText(String)``` on any TextView.
+* ```setAlpha()``` Calls ```setAlpha(float)``` on any View.
+* ```setVisible()``` Calls ```setVisibility(int)``` on any View.
+* ```linkify()``` Calls ```Linkify.addLinks(view, ALL)``` on any TextView.
+* ```setTypeface()``` Calls ```setTypeface(Typeface)``` on any TextView.
+* ```setProgress()``` Calls ```setProgress(int)``` on any ProgressBar.
+* ```setMax()``` Calls ```setMax(int)``` on any ProgressBar.
+* ```setRating()``` Calls ```setRating(int)``` on any RatingBar.
+* ```setImageResource()``` Calls ```setImageResource(int)``` on any ImageView.
+* ```setImageDrawable()``` Calls ```setImageDrawable(Drawable)``` on any ImageView.
+* ```setImageBitmap()``` Calls ```setImageBitmap(Bitmap)``` on any ImageView.
+* ```setImageUrl()``` Uses [Glide](https://github.com/bumptech/glide) to download the image and put it in an ImageView.
+* ```setOnClickListener()```
+* ```setOnTouchListener()```
+* ```setOnLongClickListener()```
+* ```setTag()```
+* ```setChecked()```
+* ```setAdapter()```
 
 # Gradle
 ```groovy
@@ -30,7 +50,6 @@ compile 'com.github.thepacific:adapter:1.0.3'
 
 # Dependencies
 ```groovy
-// You can replace it with other image loading library
 compile 'com.github.bumptech.glide:glide:3.7.0'
 ```
 

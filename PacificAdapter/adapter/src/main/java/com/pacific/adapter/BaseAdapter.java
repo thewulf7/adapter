@@ -64,8 +64,8 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
     }
 
     @Override
-    public void addAll(List<T> elem) {
-        data.addAll(elem);
+    public void addAll(List<T> elements) {
+        data.addAll(elements);
         notifyDataSetChanged();
     }
 
@@ -88,8 +88,8 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
     }
 
     @Override
-    public void remove(List<T> list) {
-        data.removeAll(list);
+    public void removeAll(List<T> elements) {
+        data.removeAll(elements);
         notifyDataSetChanged();
     }
 
@@ -113,11 +113,11 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
     }
 
     @Override
-    public void replaceAll(List<T> elem) {
+    public void replaceAll(List<T> elements) {
         if (data.size() > 0) {
             data.clear();
         }
-        data.addAll(elem);
+        data.addAll(elements);
         notifyDataSetChanged();
     }
 

@@ -9,13 +9,13 @@ interface DataIO<T> {
 
     void addAt(int location, T elem);
 
-    void addAll(List<T> elem);
+    void addAll(List<T> elements);
 
-    void addAllAt(int location, List<T> list);
+    void addAllAt(int location, List<T> elements);
 
     void remove(T elem);
 
-    void remove(List<T> list);
+    void removeAll(List<T> elements);
 
     void removeAt(int index);
 
@@ -25,7 +25,7 @@ interface DataIO<T> {
 
     void replaceAt(int index, T elem);
 
-    void replaceAll(List<T> elem);
+    void replaceAll(List<T> elements);
 
     ArrayList<T> getAll();
 

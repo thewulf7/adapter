@@ -27,6 +27,7 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 * ```setOnClickListener()```
 * ```setOnTouchListener()```
 * ```setOnLongClickListener()```
+* ```setOnCheckedChangeListener()```
 * ```setTag()```
 * ```setChecked()```
 * ```setAdapter()```

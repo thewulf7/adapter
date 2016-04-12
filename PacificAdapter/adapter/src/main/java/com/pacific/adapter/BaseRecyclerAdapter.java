@@ -59,8 +59,8 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     }
 
     @Override
-    public void addAll(List<T> elem) {
-        data.addAll(elem);
+    public void addAll(List<T> elements) {
+        data.addAll(elements);
         notifyDataSetChanged();
     }
 
@@ -83,8 +83,8 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     }
 
     @Override
-    public void remove(List<T> list) {
-        data.removeAll(list);
+    public void removeAll(List<T> elements) {
+        data.removeAll(elements);
         notifyDataSetChanged();
     }
 
@@ -108,11 +108,11 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     }
 
     @Override
-    public void replaceAll(List<T> elem) {
+    public void replaceAll(List<T> elements) {
         if (data.size() > 0) {
             data.clear();
         }
-        data.addAll(elem);
+        data.addAll(elements);
         notifyDataSetChanged();
     }
 

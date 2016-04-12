@@ -5,6 +5,10 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.View;
@@ -12,8 +16,11 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Checkable;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -21,43 +28,54 @@ import com.bumptech.glide.Glide;
 
 abstract class BaseAdapterHelper<T> {
     protected SparseArray<View> views;
+
     public <V extends View> V getView(int viewId) {
         return retrieveView(viewId);
     }
 
-    public T setText(int viewId, String value) {
+    public T setText(int viewId, CharSequence value) {
         TextView view = retrieveView(viewId);
         view.setText(value);
         return (T) this;
     }
 
-    public T setImageResource(int viewId, int imageResId) {
-        ImageView view = retrieveView(viewId);
-        view.setImageResource(imageResId);
+    public T setText(int viewId, @StringRes int stringRes) {
+        TextView view = retrieveView(viewId);
+        view.setText(stringRes);
         return (T) this;
     }
 
-    public T setBackgroundColor(int viewId, int color) {
+    public T setImageResource(int viewId, @DrawableRes int imageRes) {
+        ImageView view = retrieveView(viewId);
+        view.setImageResource(imageRes);
+        return (T) this;
+    }
+
+    public T setBackgroundColor(int viewId, @ColorInt int color) {
         View view = retrieveView(viewId);
         view.setBackgroundColor(color);
         return (T) this;
     }
 
-    public T setBackgroundRes(int viewId, int backgroundRes) {
+    public T setBackgroundRes(int viewId, @DrawableRes int backgroundRes) {
         View view = retrieveView(viewId);
         view.setBackgroundResource(backgroundRes);
         return (T) this;
     }
 
-    public T setTextColor(int viewId, int textColor) {
+    public T setTextColor(int viewId, @ColorInt int textColor) {
         TextView view = retrieveView(viewId);
         view.setTextColor(textColor);
         return (T) this;
     }
 
-    public T setTextColorRes(int viewId, int textColorRes) {
+    public T setTextColorRes(int viewId, @ColorRes int textColorRes) {
         TextView view = retrieveView(viewId);
-        view.setTextColor(getItemView().getContext().getResources().getColor(textColorRes));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            view.setTextColor(getItemView().getContext().getResources().getColor(textColorRes, null));
+        } else {
+            view.setTextColor(getItemView().getContext().getResources().getColor(textColorRes));
+        }
         return (T) this;
     }
 
@@ -83,7 +101,6 @@ abstract class BaseAdapterHelper<T> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             retrieveView(viewId).setAlpha(value);
         } else {
-            // Pre-honeycomb hack to set Alpha value
             AlphaAnimation alpha = new AlphaAnimation(value, value);
             alpha.setDuration(0);
             alpha.setFillAfter(true);
@@ -92,9 +109,9 @@ abstract class BaseAdapterHelper<T> {
         return (T) this;
     }
 
-    public T setVisible(int viewId, boolean visible) {
+    public T setVisible(int viewId, int visibility) {
         View view = retrieveView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        view.setVisibility(visibility);
         return (T) this;
     }
 
@@ -170,6 +187,18 @@ abstract class BaseAdapterHelper<T> {
         return (T) this;
     }
 
+    public T setOnCheckedChangeListener(int viewId, CompoundButton.OnCheckedChangeListener listener) {
+        CompoundButton view = retrieveView(viewId);
+        view.setOnCheckedChangeListener(listener);
+        return (T) this;
+    }
+
+    public T setRadioGroupOnCheckedChangeListener(int viewId, RadioGroup.OnCheckedChangeListener listener) {
+        RadioGroup view = retrieveView(viewId);
+        view.setOnCheckedChangeListener(listener);
+        return (T) this;
+    }
+
     public T setTag(int viewId, Object tag) {
         View view = retrieveView(viewId);
         view.setTag(tag);
@@ -183,8 +212,14 @@ abstract class BaseAdapterHelper<T> {
     }
 
     public T setChecked(int viewId, boolean checked) {
-        Checkable view = (Checkable) retrieveView(viewId);
-        view.setChecked(checked);
+        View view = retrieveView(viewId);
+        if (view instanceof CompoundButton) {
+            ((CompoundButton) view).setChecked(checked);
+        } else if (view instanceof CheckedTextView) {
+            ((CheckedTextView) view).setChecked(checked);
+        } else {
+            ((Checkable) view).setChecked(checked);
+        }
         return (T) this;
     }
 

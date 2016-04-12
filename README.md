@@ -34,7 +34,7 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 
 # Gradle
 ```groovy
-compile 'com.github.thepacific:adapter:1.0.3'
+compile 'com.github.thepacific:adapter:{lastest version}'
 ```
 
 # RecyclerView , ListView , GrideView ,ViewPager

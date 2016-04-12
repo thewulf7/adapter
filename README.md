@@ -37,17 +37,17 @@ A quick adapter library for ListView , GridView , RecyclerView and ExpandableLis
 compile 'com.github.thepacific:adapter:1.0.3'
 ```
 
-# RecyclerView , ListView , GrideView
+# RecyclerView , ListView , GrideView ,ViewPager
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/grid.PNG)
-
+<p>For more features , you can extend their Base**Adapter
 # ExpandableListView
 * ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/expandable.PNG)
-
+<p>For more features , you can extend its Base**Adapter
 # Limit
 * Currently, don't do getItemView().setTag() ,because ItemView tag has be set to retain Helper object .
 

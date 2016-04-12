@@ -34,4 +34,6 @@ interface DataIO<T> {
     int getSize();
 
     boolean contains(T elem);
+
+    void onEmpty();
 }

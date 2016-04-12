@@ -53,5 +53,4 @@ final public class RecyclerAdapterHelper extends BaseAdapterHelper<RecyclerAdapt
         viewHolder.setIsRecyclable(recyclable);
         return this;
     }
-
 }

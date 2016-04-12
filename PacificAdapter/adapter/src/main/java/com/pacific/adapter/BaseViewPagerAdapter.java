@@ -1,54 +1,32 @@
 package com.pacific.adapter;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
-abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.BaseAdapter implements DataIO<T> {
-
+public abstract class BaseViewPagerAdapter<T, H extends PagerAdapterHelper> extends PagerAdapter implements DataIO<T> {
     protected final Context context;
     protected final int layoutResId;
     protected final ArrayList<T> data;
+    protected Queue<View> cacheViews;
+    protected int currentPosition = -1;
+    protected View currentTarget;
 
-    public BaseAdapter(Context context, int layoutResId) {
+    public BaseViewPagerAdapter(Context context, int layoutResId) {
         this(context, layoutResId, null);
     }
 
-    public BaseAdapter(Context context, int layoutResId, List<T> data) {
+    public BaseViewPagerAdapter(Context context, int layoutResId, List<T> data) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
         this.context = context;
         this.layoutResId = layoutResId;
-    }
-
-    @Override
-    public int getCount() {
-        return getSize();
-    }
-
-    @Override
-    public T getItem(int position) {
-        return get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        H helper = getAdapterHelper(position, convertView, parent);
-        T item = getItem(position);
-        convert(helper, item);
-        return helper.getItemView();
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return position < data.size();
+        this.cacheViews = new LinkedList<>();
     }
 
     @Override
@@ -152,6 +130,40 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
         super.notifyDataSetChanged();
         if (getSize() == 0) {
             onEmpty();
+        }
+    }
+
+    @Override
+    public int getCount() {
+        return getSize();
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        H helper = getAdapterHelper(position, cacheViews.poll(), container);
+        T item = get(position);
+        convert(helper, item);
+        return helper.getItemView();
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if (object instanceof View) {
+            container.removeView((View) object);
+            cacheViews.add((View) object);
+        }
+    }
+
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        this.currentPosition = position;
+        if (object instanceof View) {
+            this.currentTarget = (View) object;
         }
     }
 

@@ -15,7 +15,7 @@ final public class ExpandableAdapterHelper extends BaseAdapterHelper<ExpandableA
     private ExpandableAdapterHelper(Context context, ViewGroup parent, int layoutId, int groupPosition, int childPosition) {
         this.groupPosition = groupPosition;
         this.childPosition = childPosition;
-        this.views = new SparseArray();
+        this.views = new SparseArray<>();
         this.convertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
         this.convertView.setTag(this);
     }

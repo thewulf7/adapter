@@ -74,18 +74,27 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     public void remove(T elem) {
         data.remove(elem);
         notifyDataSetChanged();
+        if (getSize() == 0) {
+            onEmpty();
+        }
     }
 
     @Override
     public void removeAt(int index) {
         data.remove(index);
         notifyDataSetChanged();
+        if (getSize() == 0) {
+            onEmpty();
+        }
     }
 
     @Override
     public void removeAll(List<T> elements) {
         data.removeAll(elements);
         notifyDataSetChanged();
+        if (getSize() == 0) {
+            onEmpty();
+        }
     }
 
     @Override
@@ -94,6 +103,7 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
             data.clear();
             notifyDataSetChanged();
         }
+        onEmpty();
     }
 
     @Override
@@ -136,6 +146,10 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     @Override
     public boolean contains(T elem) {
         return data.contains(elem);
+    }
+
+    @Override
+    public void onEmpty() {
     }
 
     /**

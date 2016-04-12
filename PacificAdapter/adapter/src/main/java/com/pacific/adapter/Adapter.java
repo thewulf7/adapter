@@ -16,8 +16,8 @@ public abstract class Adapter<T> extends BaseAdapter<T, AdapterHelper> {
         super(context, layoutResId, data);
     }
 
+    @Override
     protected AdapterHelper getAdapterHelper(int position, View convertView, ViewGroup parent) {
         return AdapterHelper.get(context, convertView, parent, layoutResId, position);
     }
-
 }

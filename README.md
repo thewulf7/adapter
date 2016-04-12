@@ -1,5 +1,5 @@
 # Adapter
-A quick adapter library for ListView , GridView , RecyclerView and ExpandableListView on android. 
+A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. 
 <p>[中文教程](http://www.jianshu.com/p/f18f77255952)
 <p>
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
@@ -40,6 +40,7 @@ compile 'com.github.thepacific:adapter:1.0.3'
 # RecyclerView , ListView , GrideView ,ViewPager
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
+* ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/grid.PNG)  
 For more features , you can extend their Base**Adapter

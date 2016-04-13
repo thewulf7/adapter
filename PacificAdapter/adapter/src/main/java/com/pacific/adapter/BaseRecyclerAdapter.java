@@ -152,20 +152,7 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     public void onEmpty() {
     }
 
-    /**
-     * Implement this method and use the helper to adapt the view to the given item.
-     *
-     * @param helper A fully initialized helper.
-     * @param item   The item that needs to be displayed.
-     */
     protected abstract void convert(H helper, T item);
 
-
-    /**
-     * You can override this method to use a custom RecycleAdapterHelper in order to fit your needs
-     *
-     * @param viewHolder The viewHolder that this view will eventually be attached to
-     * @return An instance of RecycleAdapterHelper
-     */
     protected abstract H getAdapterHelper(ViewHolder viewHolder);
 }

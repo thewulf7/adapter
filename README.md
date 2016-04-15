@@ -63,7 +63,7 @@ for more features , you can extend its Base Adapter
             }
         };
 
-/***************************Without Item Layout and create view from java code***************************************/
+/******************Without Item Layout and create view from java code*****************/
         adapter = new ViewPagerAdapter<String>(context) {
             @Override
             protected void convert(PagerAdapterHelper helper, String item) {

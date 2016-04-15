@@ -39,7 +39,8 @@ compile 'com.github.thepacific:adapter:{lastest version}'
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
-* AdapterHelper and Adapter for ListView and GridView  
+* AdapterHelper and Adapter for ListView and GridView
+  
 #### Single layout
 * Just override convert()
 ```java
@@ -148,6 +149,7 @@ for more features , you can extend its Base Adapter
 
 # ViewPager
 * ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
+
 #### With layout
 * Just override convert()
 ```java

@@ -42,6 +42,77 @@ compile 'com.github.thepacific:adapter:{lastest version}'
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
 
+#### Single Layout
+```java
+adapter = new Adapter<ExploreBean>(getContext(), R.layout.item) {
+            @Override
+            protected void convert(final AdapterHelper helper, ExploreBean exploreBean) {
+                final int position = helper.getPosition();
+                helper
+                        .setText(R.id.tv_explore_name, "__Index: " + String.valueOf(position))
+                        .setText(R.id.tv_explore_desc, exploreBean.getDescription())
+                        .getItemView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clickSnack(position);
+                    }
+                });
+            }
+        };      
+```
+
+#### Multiple Layout
+```java
+adapter = new Adapter<ExploreBean>(getContext(), R.layout.item) {
+            @Override
+            protected void convert(final AdapterHelper helper, ExploreBean exploreBean) {
+                final int position = helper.getPosition();
+                if (position % 3 == 0) {
+                    helper.setText(R.id.tv_explore_name, "__Index: " + String.valueOf(position));
+                } else if (position % 3 == 1) {
+                    helper.setImageResource(R.id.img_explore_icon, exploreBean.getIconResId());
+                } else {
+                    helper.getItemView().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            clickSnack(position);
+                        }
+                    });
+                }
+            }
+
+            /**
+             * Must be overridden , when you have more than one item layout.
+             * No need to be overridden , when you only have one item layout.
+             */
+            @Override
+            public int getItemViewType(int position) {
+                if (position % 3 == 0) {
+                    return 0;
+                } else if (position % 3 == 1) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+
+            /**
+             * Get layoutResId from view type  @see #getItemViewType(int position) return value.
+             * Must be overridden , when you have more than one item layout.
+             * No need to be overridden , when you only have one item layout.
+             */
+            @Override
+            public int getLayoutResId(int viewType) {
+                if (viewType == 0) {
+                    return R.layout.item;
+                } else if (viewType == 1) {
+                    return R.layout.item0;
+                } else {
+                    return R.layout.item1;
+                }
+            }
+        };
+```
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/grid.PNG)  
 for more features , you can extend their Base Adapter
@@ -55,7 +126,7 @@ for more features , you can extend its Base Adapter
 # ViewPager
 * ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
 ```java
-/*************************** With Item Layout ***************************************/
+/***************************With Item Layout***************************************/
         adapter = new ViewPagerAdapter<String>(context,R.layout.view_pager_view) {
             @Override
             protected void convert(PagerAdapterHelper helper, String item) {

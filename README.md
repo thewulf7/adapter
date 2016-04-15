@@ -185,7 +185,7 @@ adapter = new ViewPagerAdapter<String>(context) {
 ```
 for more features , you can extend its Base Adapter
 
-# Othes
+# Others
 * onEmptyData() and onHasData() callback , when data size is 0 . Usesful for display and hide empty tip view.
 
 # Dependencies

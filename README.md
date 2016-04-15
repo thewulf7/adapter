@@ -39,7 +39,7 @@ compile 'com.github.thepacific:adapter:{lastest version}'
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
-* AdapterHelper and Adapter for ListView and GridView 
+* AdapterHelper and Adapter for ListView and GridView  
 #### Single layout
 * Just override convert()
 ```java

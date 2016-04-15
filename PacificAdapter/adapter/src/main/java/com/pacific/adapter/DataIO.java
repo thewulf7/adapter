@@ -35,5 +35,7 @@ interface DataIO<T> {
 
     boolean contains(T elem);
 
-    void onEmpty();
+    void onEmptyData();
+
+    void onHasData();
 }

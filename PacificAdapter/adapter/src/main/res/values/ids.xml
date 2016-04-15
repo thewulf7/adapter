@@ -1,0 +1,4 @@
+<resources>
+    <item name="tag_helper" type="id"></item>
+    <item name="tag_item_layout" type="id"></item>
+</resources>

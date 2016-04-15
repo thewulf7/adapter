@@ -144,14 +144,20 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
     }
 
     @Override
-    public void onEmpty() {
+    public void onEmptyData() {
+    }
+
+    @Override
+    public void onHasData() {
     }
 
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
         if (getSize() == 0) {
-            onEmpty();
+            onEmptyData();
+        } else {
+            onHasData();
         }
     }
 

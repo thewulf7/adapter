@@ -50,51 +50,49 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     public void add(T elem) {
         data.add(elem);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void addAt(int location, T elem) {
         data.add(location, elem);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void addAll(List<T> elements) {
         data.addAll(elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void addAllAt(int location, List<T> elements) {
         data.addAll(location, elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void remove(T elem) {
         data.remove(elem);
         notifyDataSetChanged();
-        if (getSize() == 0) {
-            onEmpty();
-        }
+        onDataSetChanged();
     }
 
     @Override
     public void removeAt(int index) {
         data.remove(index);
         notifyDataSetChanged();
-        if (getSize() == 0) {
-            onEmpty();
-        }
+        onDataSetChanged();
     }
 
     @Override
     public void removeAll(List<T> elements) {
         data.removeAll(elements);
         notifyDataSetChanged();
-        if (getSize() == 0) {
-            onEmpty();
-        }
+        onDataSetChanged();
     }
 
     @Override
@@ -102,8 +100,8 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
         if (data != null && data.size() > 0) {
             data.clear();
             notifyDataSetChanged();
+            onDataSetChanged();
         }
-        onEmpty();
     }
 
     @Override
@@ -124,6 +122,7 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
         }
         data.addAll(elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
@@ -149,7 +148,21 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     }
 
     @Override
-    public void onEmpty() {
+    public void onEmptyData() {
+
+    }
+
+    @Override
+    public void onHasData() {
+
+    }
+
+    public void onDataSetChanged() {
+        if (getSize() == 0) {
+            onEmptyData();
+        } else {
+            onHasData();
+        }
     }
 
     protected abstract void convert(H helper, T item);

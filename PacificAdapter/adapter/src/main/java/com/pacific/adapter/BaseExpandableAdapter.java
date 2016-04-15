@@ -189,14 +189,20 @@ abstract class BaseExpandableAdapter<T, V, H extends ExpandableAdapterHelper> ex
     }
 
     @Override
-    public void onEmpty() {
+    public void onEmptyData() {
+    }
+
+    @Override
+    public void onHasData() {
     }
 
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
         if (getSize() == 0) {
-            onEmpty();
+            onEmptyData();
+        } else {
+            onHasData();
         }
     }
 

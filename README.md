@@ -12,7 +12,6 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 * Multiple view type support for ListView 、GrideView 、RecyclerView
 
 ## BaseAdapterHelper
-
 * ```setText()``` Calls ```setText(String)``` on any TextView.
 * ```setAlpha()``` Calls ```setAlpha(float)``` on any View.
 * ```setVisible()``` Calls ```setVisibility(int)``` on any View.
@@ -40,9 +39,9 @@ compile 'com.github.thepacific:adapter:{lastest version}'
 
 # RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
-* AdapterHelper and Adapter for ListView and GridView
-
+* AdapterHelper and Adapter for ListView and GridView 
 #### Single layout
+* Just override convert()
 ```java
 adapter = new Adapter<ExploreBean>(context, R.layout.item) {
             @Override
@@ -62,8 +61,9 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item) {
 ```
 
 #### Multiple view type layout
+* Need to override convert(),getItemViewType() and getLayoutResId()
 ```java
-adapter = new Adapter<ExploreBean>(context, R.layout.item) {
+adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.layout.item1) {
             @Override
             protected void convert(final AdapterHelper helper, ExploreBean exploreBean) {
                 final int position = helper.getPosition();
@@ -117,6 +117,7 @@ for more features , you can extend their Base Adapter
 
 # ExpandableListView
 * ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
+* Need to override getChildren(),convertGroupView() and convertChildView()
 ```java
 adapter = new ExpandableAdapter<MenuBean, ExploreBean>(context, R.layout.item_group, R.layout.item_child) {
             @Override
@@ -147,8 +148,8 @@ for more features , you can extend its Base Adapter
 
 # ViewPager
 * ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
-
 #### With layout
+* Just override convert()
 ```java
 adapter = new ViewPagerAdapter<String>(context,R.layout.pager_view) {
             @Override
@@ -157,8 +158,9 @@ adapter = new ViewPagerAdapter<String>(context,R.layout.pager_view) {
             }
         };
 ```
-
 #### Without Item Layout and create view from java code
+
+* Need to override convert() and createView()
 ```java
 adapter = new ViewPagerAdapter<String>(context) {
             @Override

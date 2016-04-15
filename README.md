@@ -1,5 +1,5 @@
 # Adapter
-A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. Multiple view type is supported for ListView 、GrideView 、RecyclerView.
+A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. Multiple view type is supported for ListView ,GrideView ,RecyclerView.
 <p>[中文教程](http://www.jianshu.com/p/f18f77255952)
 <p>
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
@@ -160,7 +160,7 @@ adapter = new ViewPagerAdapter<String>(context,R.layout.pager_view) {
             }
         };
 ```
-#### Without Item Layout and create view from java code
+#### Without layout and create view from java code
 
 * Need to override convert() and createView()
 ```java

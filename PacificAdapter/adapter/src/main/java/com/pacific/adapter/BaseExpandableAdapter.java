@@ -188,6 +188,23 @@ abstract class BaseExpandableAdapter<T, V, H extends ExpandableAdapterHelper> ex
         return help.getItemView();
     }
 
+    @Override
+    public void onEmptyData() {
+    }
+
+    @Override
+    public void onHasData() {
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        if (getSize() == 0) {
+            onEmptyData();
+        } else {
+            onHasData();
+        }
+    }
 
     protected abstract List<V> getChildren(int groupPosition);
 

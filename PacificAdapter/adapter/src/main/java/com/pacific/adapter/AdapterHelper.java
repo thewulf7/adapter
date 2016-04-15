@@ -13,16 +13,16 @@ final public class AdapterHelper extends BaseAdapterHelper<AdapterHelper> {
 
     private AdapterHelper(Context context, ViewGroup parent, int layoutId, int position) {
         this.position = position;
-        this.views = new SparseArray();
+        this.views = new SparseArray<>();
         this.convertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        this.convertView.setTag(this);
+        this.convertView.setTag(R.id.tag_adapter_helper, this);
     }
 
     static AdapterHelper get(Context context, View convertView, ViewGroup parent, int layoutId, int position) {
         if (convertView == null) {
             return new AdapterHelper(context, parent, layoutId, position);
         }
-        AdapterHelper helper = (AdapterHelper) convertView.getTag();
+        AdapterHelper helper = (AdapterHelper) convertView.getTag(R.id.tag_adapter_helper);
         helper.position = position;
         return helper;
     }

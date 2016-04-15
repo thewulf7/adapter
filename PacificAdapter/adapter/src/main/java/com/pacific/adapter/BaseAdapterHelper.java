@@ -8,6 +8,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.FloatRange;
 import android.support.annotation.StringRes;
 import android.text.util.Linkify;
 import android.util.SparseArray;
@@ -26,7 +27,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-abstract class BaseAdapterHelper<T> {
+public abstract class BaseAdapterHelper<T> {
     protected SparseArray<View> views;
 
     public <V extends View> V getView(int viewId) {
@@ -97,7 +98,7 @@ abstract class BaseAdapterHelper<T> {
         return (T) this;
     }
 
-    public T setAlpha(int viewId, float value) {
+    public T setAlpha(int viewId, @FloatRange(from = 0.0, to = 1.0) float value) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             retrieveView(viewId).setAlpha(value);
         } else {

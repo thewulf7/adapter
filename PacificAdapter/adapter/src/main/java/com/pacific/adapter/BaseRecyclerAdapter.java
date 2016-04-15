@@ -13,23 +13,44 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
 
     protected final Context context;
     protected final LayoutInflater layoutInflater;
-    protected final int layoutResId;
+    protected final int[] layoutResIds;
     protected final ArrayList<T> data;
 
-    public BaseRecyclerAdapter(Context context, int layoutResId) {
-        this(context, layoutResId, null);
+    public BaseRecyclerAdapter(Context context, int... layoutResIds) {
+        this(context, null, layoutResIds);
     }
 
-    public BaseRecyclerAdapter(Context context, int layoutResId, List<T> data) {
+    public BaseRecyclerAdapter(Context context, List<T> data, int... layoutResIds) {
         this.context = context;
-        this.layoutResId = layoutResId;
+        this.layoutResIds = layoutResIds;
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (getViewTypeCount() == 1) {
+            return super.getItemViewType(position);
+        }
+        throw new RuntimeException("Required method getItemViewType was not overridden");
+    }
+
+    public int getViewTypeCount() {
+        return layoutResIds.length;
+    }
+
+    public int getLayoutResId(int viewType) {
+        throw new RuntimeException("Required method getLayoutResId was not overridden");
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layoutResId;
+        if (getViewTypeCount() > 1) {
+            layoutResId = getLayoutResId(getItemViewType(viewType));
+        } else {
+            layoutResId = layoutResIds[0];
+        }
         return new ViewHolder(layoutInflater.inflate(layoutResId, parent, false)) {
         };
     }
@@ -50,42 +71,49 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
     public void add(T elem) {
         data.add(elem);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void addAt(int location, T elem) {
         data.add(location, elem);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void addAll(List<T> elements) {
         data.addAll(elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void addAllAt(int location, List<T> elements) {
         data.addAll(location, elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void remove(T elem) {
         data.remove(elem);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void removeAt(int index) {
         data.remove(index);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
     public void removeAll(List<T> elements) {
         data.removeAll(elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
@@ -93,6 +121,7 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
         if (data != null && data.size() > 0) {
             data.clear();
             notifyDataSetChanged();
+            onDataSetChanged();
         }
     }
 
@@ -114,6 +143,7 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
         }
         data.addAll(elements);
         notifyDataSetChanged();
+        onDataSetChanged();
     }
 
     @Override
@@ -138,20 +168,25 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
         return data.contains(elem);
     }
 
-    /**
-     * Implement this method and use the helper to adapt the view to the given item.
-     *
-     * @param helper A fully initialized helper.
-     * @param item   The item that needs to be displayed.
-     */
+    @Override
+    public void onEmptyData() {
+
+    }
+
+    @Override
+    public void onHasData() {
+
+    }
+
+    public void onDataSetChanged() {
+        if (getSize() == 0) {
+            onEmptyData();
+        } else {
+            onHasData();
+        }
+    }
+
     protected abstract void convert(H helper, T item);
 
-
-    /**
-     * You can override this method to use a custom RecycleAdapterHelper in order to fit your needs
-     *
-     * @param viewHolder The viewHolder that this view will eventually be attached to
-     * @return An instance of RecycleAdapterHelper
-     */
     protected abstract H getAdapterHelper(ViewHolder viewHolder);
 }

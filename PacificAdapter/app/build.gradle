@@ -1,7 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+<<<<<<< HEAD
     compileSdkVersion "android-N"
+=======
+    compileSdkVersion 23
+>>>>>>> 5e15d34bc3277148feebf70ad4c0f8491ee2b4b1
     buildToolsVersion "24.0.0 rc2"
 
     defaultConfig {
@@ -30,5 +34,12 @@ dependencies {
     compile project(':adapter')
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
+<<<<<<< HEAD
+=======
+    compile 'io.reactivex:rxjava:1.1.1'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.trello:rxlifecycle:0.5.0'
+    compile 'com.trello:rxlifecycle-components:0.5.0'
+>>>>>>> 5e15d34bc3277148feebf70ad4c0f8491ee2b4b1
     compile 'com.android.support:support-v4:23.3.0'
 }

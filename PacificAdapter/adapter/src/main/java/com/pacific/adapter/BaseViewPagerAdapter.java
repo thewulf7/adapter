@@ -1,79 +1,36 @@
 package com.pacific.adapter;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
-abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.BaseAdapter implements DataIO<T> {
-
+abstract class BaseViewPagerAdapter<T, H extends PagerAdapterHelper> extends PagerAdapter implements DataIO<T> {
     protected final Context context;
-    protected final int layoutResIds[];
+    protected final int layoutResId;
     protected final ArrayList<T> data;
+    protected Queue<View> cacheViews;
+    protected int currentPosition = -1;
+    protected View currentTarget;
 
-    public BaseAdapter(Context context, int... layoutResIds) {
-        this(context, null, layoutResIds);
+    public BaseViewPagerAdapter(Context context) {
+        this(context, null, 0);
     }
 
-    public BaseAdapter(Context context, List<T> data, int... layoutResIds) {
-        if (layoutResIds.length == 0) {
-            throw new RuntimeException("Has no layout to attach");
-        }
+    public BaseViewPagerAdapter(Context context, int layoutResId) {
+        this(context, null, layoutResId);
+    }
+
+    public BaseViewPagerAdapter(Context context, List<T> data, int layoutResId) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
         this.context = context;
-        this.layoutResIds = layoutResIds;
-    }
-
-    @Override
-    public int getCount() {
-        return getSize();
-    }
-
-    @Override
-    public T getItem(int position) {
-        return get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (getViewTypeCount() == 1) {
-            return super.getItemViewType(position);
-        }
-        throw new RuntimeException("Required method getItemViewType was not overridden");
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return layoutResIds.length;
-    }
-
-    public int getLayoutResId(int viewType) {
-        throw new RuntimeException("Required method getLayoutResId was not overridden");
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        H helper;
-        if (getViewTypeCount() > 1) {
-            helper = getAdapterHelper(position, convertView, parent, getLayoutResId(getItemViewType(position)));
-        } else {
-            helper = getAdapterHelper(position, convertView, parent, layoutResIds[0]);
-        }
-        T item = getItem(position);
-        convert(helper, item);
-        return helper.getItemView();
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return position < data.size();
+        this.layoutResId = layoutResId;
+        this.cacheViews = new LinkedList<>();
     }
 
     @Override
@@ -186,7 +143,53 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
         }
     }
 
+    @Override
+    public int getCount() {
+        return getSize();
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        H helper = getAdapterHelper(position, cacheViews.poll(), container);
+        T item = get(position);
+        convert(helper, item);
+        return helper.getItemView();
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if (object instanceof View) {
+            container.removeView((View) object);
+            cacheViews.add((View) object);
+        }
+    }
+
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        this.currentPosition = position;
+        if (object instanceof View) {
+            this.currentTarget = (View) object;
+        }
+    }
+
+    protected View createView(ViewGroup container, int position) {
+        throw new RuntimeException("Required method createView was not overridden");
+    }
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public View getCurrentTarget() {
+        return currentTarget;
+    }
+
     protected abstract void convert(H helper, T item);
 
-    protected abstract H getAdapterHelper(int position, View convertView, ViewGroup parent, int layoutResId);
+    protected abstract H getAdapterHelper(int position, View convertView, ViewGroup parent);
 }

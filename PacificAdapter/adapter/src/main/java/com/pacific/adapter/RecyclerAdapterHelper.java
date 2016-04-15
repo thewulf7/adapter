@@ -15,11 +15,11 @@ final public class RecyclerAdapterHelper extends BaseAdapterHelper<RecyclerAdapt
 
     static RecyclerAdapterHelper get(ViewHolder viewHolder) {
         RecyclerAdapterHelper helper;
-        if (viewHolder.itemView.getTag() == null) {
+        if (viewHolder.itemView.getTag(R.id.tag_adapter_helper) == null) {
             helper = new RecyclerAdapterHelper(viewHolder);
-            viewHolder.itemView.setTag(helper);
+            viewHolder.itemView.setTag(R.id.tag_adapter_helper, helper);
         } else {
-            helper = (RecyclerAdapterHelper) viewHolder.itemView.getTag();
+            helper = (RecyclerAdapterHelper) viewHolder.itemView.getTag(R.id.tag_adapter_helper);
         }
         return helper;
     }
@@ -53,5 +53,4 @@ final public class RecyclerAdapterHelper extends BaseAdapterHelper<RecyclerAdapt
         viewHolder.setIsRecyclable(recyclable);
         return this;
     }
-
 }

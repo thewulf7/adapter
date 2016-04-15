@@ -3,7 +3,7 @@ package com.pacific.example;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +11,22 @@ import android.widget.ExpandableListView;
 
 import com.pacific.adapter.ExpandableAdapter;
 import com.pacific.adapter.ExpandableAdapterHelper;
+import com.trello.rxlifecycle.FragmentEvent;
+import com.trello.rxlifecycle.components.support.RxFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.Scheduler;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.observers.Observers;
+import rx.schedulers.Schedulers;
 
-public class ExpandableListViewFragment extends Fragment {
+
+public class ExpandableListViewFragment extends RxFragment {
 
     private ExpandableListView listView;
     private ExpandableAdapter<MenuBean, ExploreBean> adapter;
@@ -55,6 +65,7 @@ public class ExpandableListViewFragment extends Fragment {
                         }
                     }
                 });
+                helper.getItemView().setTag("hello world");
             }
 
             @Override
@@ -66,6 +77,7 @@ public class ExpandableListViewFragment extends Fragment {
                         clickSnack(helper.getGroupPosition(), helper.getChildPosition());
                     }
                 });
+                helper.getItemView().setTag("hello world");
             }
         };
     }
@@ -86,7 +98,23 @@ public class ExpandableListViewFragment extends Fragment {
             }
         });
         listView.setAdapter(adapter);
-        load();
+        Observable
+                .just(null)
+                .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribeOn(Schedulers.newThread())
+                .map(new Func1<Object, List<MenuBean>>() {
+                    @Override
+                    public List<MenuBean> call(Object o) {
+                        return load();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<MenuBean>>() {
+                    @Override
+                    public void call(List<MenuBean> list0) {
+                        adapter.addAll(list0);
+                    }
+                });
     }
 
     public void clickSnack(int g, int c) {
@@ -99,7 +127,7 @@ public class ExpandableListViewFragment extends Fragment {
                 }).show();
     }
 
-    public void load() {
+    public List<MenuBean> load() {
         List<MenuBean> list0 = new ArrayList<>();
 
         list0.add(new MenuBean(R.drawable.smart_ticket, getString(R.string.smart_ticket)));
@@ -125,7 +153,6 @@ public class ExpandableListViewFragment extends Fragment {
             list.add(new ExploreBean(R.drawable.web, "web work", "start：2016.01.01，end: 2016.02.01"));
             menuBean.setExploreBeanList(list);
         }
-
-        adapter.addAll(list0);
+        return list0;
     }
 }

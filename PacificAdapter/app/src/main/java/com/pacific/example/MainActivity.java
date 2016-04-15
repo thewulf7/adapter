@@ -3,12 +3,15 @@ package com.pacific.example;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
+import com.pacific.adapter.FragmentPagerAdapter2;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -25,13 +28,14 @@ public class MainActivity extends AppCompatActivity {
         toolbar = retrieveView(R.id.toolbar);
         tabLayout = retrieveView(R.id.tab_layout);
         viewPager = retrieveView(R.id.view_pager);
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
-        viewPager.setOffscreenPageLimit(3);
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 4);
+        viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.action_home);
         tabLayout.getTabAt(1).setIcon(R.drawable.action_explore);
         tabLayout.getTabAt(2).setIcon(R.drawable.action_setting);
+        tabLayout.getTabAt(3).setIcon(R.drawable.action_setting);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -42,8 +46,11 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         toolbar.setTitle(R.string.title_setting_fragment);
                         break;
-                    default:
+                    case 2:
                         toolbar.setTitle(R.string.title_explore_fragment);
+                        break;
+                    default:
+                        toolbar.setTitle(R.string.title_explore_fragment2);
                         break;
                 }
                 viewPager.setCurrentItem(tab.getPosition());
@@ -58,7 +65,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     protected <V extends View> V retrieveView(int viewId) {
@@ -66,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static class PagerAdapter extends FragmentPagerAdapter {
+    public static class PagerAdapter extends FragmentPagerAdapter2 {
         private int count;
 
         public PagerAdapter(FragmentManager fm, int count) {
@@ -81,8 +98,10 @@ public class MainActivity extends AppCompatActivity {
                     return ListViewFragment.newInstance();
                 case 1:
                     return ExpandableListViewFragment.newInstance();
-                default:
+                case 2:
                     return RecyclerViewFragment.newInstance();
+                default:
+                    return OtherFragment.newInstance();
             }
         }
 

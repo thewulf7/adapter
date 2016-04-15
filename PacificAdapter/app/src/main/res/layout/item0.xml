@@ -5,12 +5,6 @@
     android:orientation="horizontal"
     android:padding="@dimen/margin_item_explore">
 
-    <ImageView
-        android:id="@+id/img_explore_icon"
-        style="@style/wrap_wrap"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
-
     <LinearLayout
         style="@style/wrap_wrap"
         android:layout_marginLeft="@dimen/margin_item_explore"
@@ -28,4 +22,12 @@
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/f_14" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_explore_icon"
+        style="@style/wrap_wrap"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+
 </LinearLayout>

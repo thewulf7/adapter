@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public abstract class BaseViewPagerAdapter<T, H extends PagerAdapterHelper> extends PagerAdapter implements DataIO<T> {
+abstract class BaseViewPagerAdapter<T, H extends PagerAdapterHelper> extends PagerAdapter implements DataIO<T> {
     protected final Context context;
     protected final int layoutResId;
     protected final ArrayList<T> data;
@@ -18,11 +18,15 @@ public abstract class BaseViewPagerAdapter<T, H extends PagerAdapterHelper> exte
     protected int currentPosition = -1;
     protected View currentTarget;
 
-    public BaseViewPagerAdapter(Context context, int layoutResId) {
-        this(context, layoutResId, null);
+    public BaseViewPagerAdapter(Context context) {
+        this(context, null, 0);
     }
 
-    public BaseViewPagerAdapter(Context context, int layoutResId, List<T> data) {
+    public BaseViewPagerAdapter(Context context, int layoutResId) {
+        this(context, null, layoutResId);
+    }
+
+    public BaseViewPagerAdapter(Context context, List<T> data, int layoutResId) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
         this.context = context;
         this.layoutResId = layoutResId;
@@ -171,6 +175,18 @@ public abstract class BaseViewPagerAdapter<T, H extends PagerAdapterHelper> exte
         if (object instanceof View) {
             this.currentTarget = (View) object;
         }
+    }
+
+    protected View createView(ViewGroup container, int position) {
+        throw new RuntimeException("Required method createView was not overridden");
+    }
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public View getCurrentTarget() {
+        return currentTarget;
     }
 
     protected abstract void convert(H helper, T item);

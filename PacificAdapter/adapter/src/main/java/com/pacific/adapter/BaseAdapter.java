@@ -54,6 +54,10 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
         return layoutResIds.length;
     }
 
+    public int getLayoutResId(int viewType) {
+        throw new RuntimeException("Required method getLayoutResId was not overridden");
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         H helper;
@@ -180,10 +184,6 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
         } else {
             onHasData();
         }
-    }
-
-    public int getLayoutResId(int viewType) {
-        throw new RuntimeException("Required method getLayoutResId was not overridden");
     }
 
     protected abstract void convert(H helper, T item);

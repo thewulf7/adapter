@@ -3,6 +3,11 @@ package com.pacific.example;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.pacific.adapter.PagerAdapterHelper;
 import com.pacific.adapter.ViewPagerAdapter;
@@ -18,10 +23,21 @@ public class ViewPagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
-        adapter = new ViewPagerAdapter<String>(this, R.layout.item_view_pager) {
+        adapter = new ViewPagerAdapter<String>(this) {
             @Override
             protected void convert(PagerAdapterHelper helper, String item) {
                 helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
+            }
+
+            @Override
+            protected View createView(ViewGroup container, int position) {
+                FrameLayout fl = new FrameLayout(context);
+                ImageView imageView = new ImageView(context);
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(480, 480, Gravity.CENTER);
+                imageView.setId(R.id.img_view);
+                fl.addView(imageView);
+                imageView.setLayoutParams(lp);
+                return fl;
             }
         };
         ((ViewPager) findViewById(R.id.view_pager)).setAdapter(adapter);

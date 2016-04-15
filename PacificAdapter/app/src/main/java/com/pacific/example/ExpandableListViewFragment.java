@@ -65,6 +65,7 @@ public class ExpandableListViewFragment extends RxFragment {
                         }
                     }
                 });
+                helper.getItemView().setTag("hello world");
             }
 
             @Override
@@ -76,6 +77,7 @@ public class ExpandableListViewFragment extends RxFragment {
                         clickSnack(helper.getGroupPosition(), helper.getChildPosition());
                     }
                 });
+                helper.getItemView().setTag("hello world");
             }
         };
     }

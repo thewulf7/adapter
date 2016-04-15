@@ -15,7 +15,15 @@ final public class PagerAdapterHelper extends BaseAdapterHelper<PagerAdapterHelp
         this.position = position;
         this.views = new SparseArray<>();
         this.convertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        this.convertView.setTag(this);
+        this.convertView.setTag(R.id.tag_adapter_helper, this);
+        parent.addView(this.convertView);
+    }
+
+    private PagerAdapterHelper(Context context, ViewGroup parent, View convertView, int position) {
+        this.position = position;
+        this.views = new SparseArray<>();
+        this.convertView = convertView;
+        this.convertView.setTag(R.id.tag_adapter_helper, this);
         parent.addView(this.convertView);
     }
 
@@ -23,7 +31,17 @@ final public class PagerAdapterHelper extends BaseAdapterHelper<PagerAdapterHelp
         if (convertView == null) {
             return new PagerAdapterHelper(context, parent, layoutId, position);
         }
-        PagerAdapterHelper helper = (PagerAdapterHelper) convertView.getTag();
+        PagerAdapterHelper helper = (PagerAdapterHelper) convertView.getTag(R.id.tag_adapter_helper);
+        helper.position = position;
+        parent.addView(convertView);
+        return helper;
+    }
+
+    static PagerAdapterHelper get(Context context, View convertView, ViewGroup parent, int position, boolean isNew) {
+        if (isNew) {
+            return new PagerAdapterHelper(context, parent, convertView, position);
+        }
+        PagerAdapterHelper helper = (PagerAdapterHelper) convertView.getTag(R.id.tag_adapter_helper);
         helper.position = position;
         parent.addView(convertView);
         return helper;

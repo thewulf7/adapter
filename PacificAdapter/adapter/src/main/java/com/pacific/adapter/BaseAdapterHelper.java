@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-abstract class BaseAdapterHelper<T> {
+public abstract class BaseAdapterHelper<T> {
     protected SparseArray<View> views;
 
     public <V extends View> V getView(int viewId) {

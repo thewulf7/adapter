@@ -17,14 +17,14 @@ final public class ExpandableAdapterHelper extends BaseAdapterHelper<ExpandableA
         this.childPosition = childPosition;
         this.views = new SparseArray<>();
         this.convertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        this.convertView.setTag(this);
+        this.convertView.setTag(R.id.tag_adapter_helper, this);
     }
 
     static ExpandableAdapterHelper get(Context context, View convertView, ViewGroup parent, int layoutId, int groupPosition, int childPosition) {
         if (convertView == null) {
             return new ExpandableAdapterHelper(context, parent, layoutId, groupPosition, childPosition);
         }
-        ExpandableAdapterHelper helper = (ExpandableAdapterHelper) convertView.getTag();
+        ExpandableAdapterHelper helper = (ExpandableAdapterHelper) convertView.getTag(R.id.tag_adapter_helper);
         helper.groupPosition = groupPosition;
         helper.childPosition = childPosition;
         return helper;

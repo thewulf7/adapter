@@ -13,23 +13,44 @@ abstract class BaseRecyclerAdapter<T, H extends RecyclerAdapterHelper> extends R
 
     protected final Context context;
     protected final LayoutInflater layoutInflater;
-    protected final int layoutResId;
+    protected final int[] layoutResIds;
     protected final ArrayList<T> data;
 
-    public BaseRecyclerAdapter(Context context, int layoutResId) {
-        this(context, layoutResId, null);
+    public BaseRecyclerAdapter(Context context, int... layoutResIds) {
+        this(context, null, layoutResIds);
     }
 
-    public BaseRecyclerAdapter(Context context, int layoutResId, List<T> data) {
+    public BaseRecyclerAdapter(Context context, List<T> data, int... layoutResIds) {
         this.context = context;
-        this.layoutResId = layoutResId;
+        this.layoutResIds = layoutResIds;
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (getViewTypeCount() == 1) {
+            return super.getItemViewType(position);
+        }
+        throw new RuntimeException("Required method getItemViewType was not overridden");
+    }
+
+    public int getViewTypeCount() {
+        return layoutResIds.length;
+    }
+
+    public int getLayoutResId(int viewType) {
+        throw new RuntimeException("Required method getLayoutResId was not overridden");
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layoutResId;
+        if (getViewTypeCount() > 1) {
+            layoutResId = getLayoutResId(getItemViewType(viewType));
+        } else {
+            layoutResId = layoutResIds[0];
+        }
         return new ViewHolder(layoutInflater.inflate(layoutResId, parent, false)) {
         };
     }

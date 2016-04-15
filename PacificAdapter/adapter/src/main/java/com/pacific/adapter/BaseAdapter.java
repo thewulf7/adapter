@@ -10,17 +10,20 @@ import java.util.List;
 abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.BaseAdapter implements DataIO<T> {
 
     protected final Context context;
-    protected final int layoutResId;
+    protected final int layoutResIds[];
     protected final ArrayList<T> data;
 
-    public BaseAdapter(Context context, int layoutResId) {
-        this(context, layoutResId, null);
+    public BaseAdapter(Context context, int... layoutResIds) {
+        this(context, null, layoutResIds);
     }
 
-    public BaseAdapter(Context context, int layoutResId, List<T> data) {
+    public BaseAdapter(Context context, List<T> data, int... layoutResIds) {
+        if (layoutResIds.length == 0) {
+            throw new RuntimeException("Has no layout to attach");
+        }
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
         this.context = context;
-        this.layoutResId = layoutResId;
+        this.layoutResIds = layoutResIds;
     }
 
     @Override
@@ -39,8 +42,26 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (getViewTypeCount() == 1) {
+            return super.getItemViewType(position);
+        }
+        throw new RuntimeException("Required method getItemViewType was not overridden");
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return layoutResIds.length;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        H helper = getAdapterHelper(position, convertView, parent);
+        H helper;
+        if (getViewTypeCount() > 1) {
+            helper = getAdapterHelper(position, convertView, parent, getLayoutResId(getItemViewType(position)));
+        } else {
+            helper = getAdapterHelper(position, convertView, parent, layoutResIds[0]);
+        }
         T item = getItem(position);
         convert(helper, item);
         return helper.getItemView();
@@ -161,7 +182,11 @@ abstract class BaseAdapter<T, H extends AdapterHelper> extends android.widget.Ba
         }
     }
 
+    public int getLayoutResId(int viewType) {
+        throw new RuntimeException("Required method getLayoutResId was not overridden");
+    }
+
     protected abstract void convert(H helper, T item);
 
-    protected abstract H getAdapterHelper(int position, View convertView, ViewGroup parent);
+    protected abstract H getAdapterHelper(int position, View convertView, ViewGroup parent, int layoutResId);
 }

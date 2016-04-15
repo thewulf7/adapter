@@ -42,9 +42,9 @@ compile 'com.github.thepacific:adapter:{lastest version}'
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
 
-#### Single Layout
+#### Single layout
 ```java
-adapter = new Adapter<ExploreBean>(getContext(), R.layout.item) {
+adapter = new Adapter<ExploreBean>(context, R.layout.item) {
             @Override
             protected void convert(final AdapterHelper helper, ExploreBean exploreBean) {
                 final int position = helper.getPosition();
@@ -61,9 +61,9 @@ adapter = new Adapter<ExploreBean>(getContext(), R.layout.item) {
         };      
 ```
 
-#### Multiple Layout
+#### Multiple view type layout
 ```java
-adapter = new Adapter<ExploreBean>(getContext(), R.layout.item) {
+adapter = new Adapter<ExploreBean>(context, R.layout.item) {
             @Override
             protected void convert(final AdapterHelper helper, ExploreBean exploreBean) {
                 final int position = helper.getPosition();
@@ -113,29 +113,54 @@ adapter = new Adapter<ExploreBean>(getContext(), R.layout.item) {
             }
         };
 ```
-<p>
-![](https://github.com/ThePacific/QuickAdapter/blob/master/art/grid.PNG)  
 for more features , you can extend their Base Adapter
 
 # ExpandableListView
 * ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
-<p>
-![](https://github.com/ThePacific/QuickAdapter/blob/master/art/expandable.PNG)  
+```java
+adapter = new ExpandableAdapter<MenuBean, ExploreBean>(context, R.layout.item_group, R.layout.item_child) {
+            @Override
+            protected List<ExploreBean> getChildren(int groupPosition) {
+                return get(groupPosition).getExploreBeanList();
+            }
+
+            @Override
+            protected void convertGroupView(final boolean isExpanded, final ExpandableAdapterHelper helper, MenuBean item) {
+                helper.setImageResource(R.id.img_explore_icon, item.getIconResId())
+                        .setText(R.id.tv_explore_name, item.getDescription())
+                        .getItemView().setTag("Example");
+            }
+
+            @Override
+            protected void convertChildView(boolean isLastChild, final ExpandableAdapterHelper helper, ExploreBean item) {
+                helper.getItemView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clickSnack(helper.getGroupPosition(), helper.getChildPosition());
+                    }
+                });
+                helper.getItemView().setTag("hello world");
+            }
+        };
+```
 for more features , you can extend its Base Adapter
 
 # ViewPager
 * ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
+
+#### With layout
 ```java
-/***************************With Item Layout***************************************/
-        adapter = new ViewPagerAdapter<String>(context,R.layout.view_pager_view) {
+adapter = new ViewPagerAdapter<String>(context,R.layout.pager_view) {
             @Override
             protected void convert(PagerAdapterHelper helper, String item) {
                 helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
             }
         };
+```
 
-/******************Without Item Layout and create view from java code*****************/
-        adapter = new ViewPagerAdapter<String>(context) {
+#### Without Item Layout and create view from java code
+```java
+adapter = new ViewPagerAdapter<String>(context) {
             @Override
             protected void convert(PagerAdapterHelper helper, String item) {
                 helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
@@ -154,8 +179,6 @@ for more features , you can extend its Base Adapter
             }
         };
 ```
-<p>
-![](https://github.com/ThePacific/QuickAdapter/blob/master/art/expandable.PNG)  
 for more features , you can extend its Base Adapter
 
 # Dependencies

@@ -191,6 +191,7 @@ for more features , you can extend its Base Adapter
 # Dependencies
 ```groovy
 compile 'com.github.bumptech.glide:glide:3.7.0'
+compile 'com.android.support:recyclerview-v7:23.3.0'
 ```
 
 #Thanks

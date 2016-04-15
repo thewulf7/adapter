@@ -4,7 +4,7 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 <p>
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
 <p>
-![](https://github.com/ThePacific/QuickAdapter/blob/master/art/example.gif)
+![](https://github.com/ThePacific/QuickAdapter/blob/master/art/exam.gif)
 # Features
 * Based on template type
 * Simple and clean api
@@ -184,6 +184,9 @@ adapter = new ViewPagerAdapter<String>(context) {
         };
 ```
 for more features , you can extend its Base Adapter
+
+# Othes
+* onEmptyData() and onHasData() callback , when data size is 0 . Usesful for display and hide empty tip view.
 
 # Dependencies
 ```groovy

@@ -1,5 +1,5 @@
 # Adapter
-A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. 
+A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. Multiple view type is supported for ListView 、GrideView 、RecyclerView.
 <p>[中文教程](http://www.jianshu.com/p/f18f77255952)
 <p>
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
@@ -9,6 +9,7 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 * Based on template type
 * Simple and clean api
 * Super esay to use and Much less code
+* Multiple view type support for ListView 、GrideView 、RecyclerView
 
 ## BaseAdapterHelper
 
@@ -37,22 +38,54 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 compile 'com.github.thepacific:adapter:{lastest version}'
 ```
 
-# RecyclerView , ListView , GrideView ,ViewPager
+# RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
-* ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
+
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/grid.PNG)  
-For more features , you can extend their Base**Adapter
+for more features , you can extend their Base Adapter
 
 # ExpandableListView
 * ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/expandable.PNG)  
-For more features , you can extend its Base**Adapter
+for more features , you can extend its Base Adapter
 
-# Limit
-* Currently, don't do getItemView().setTag() ,because ItemView tag has be set to retain Helper object .
+# ViewPager
+* ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
+```java
+/*************************** With Item Layout ***************************************/
+        adapter = new ViewPagerAdapter<String>(context,R.layout.view_pager_view) {
+            @Override
+            protected void convert(PagerAdapterHelper helper, String item) {
+                helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
+            }
+        };
+
+/***************************Without Item Layout and create view from java code***************************************/
+        adapter = new ViewPagerAdapter<String>(context) {
+            @Override
+            protected void convert(PagerAdapterHelper helper, String item) {
+                helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
+            }
+
+            // just override createView()
+            @Override
+            protected View createView(ViewGroup container, int position) {
+                FrameLayout fl = new FrameLayout(context);
+                ImageView imageView = new ImageView(context);
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(480, 480, Gravity.CENTER);
+                imageView.setId(R.id.img_view);
+                fl.addView(imageView);
+                imageView.setLayoutParams(lp);
+                return fl;
+            }
+        };
+```
+<p>
+![](https://github.com/ThePacific/QuickAdapter/blob/master/art/expandable.PNG)  
+for more features , you can extend its Base Adapter
 
 # Dependencies
 ```groovy

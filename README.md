@@ -186,7 +186,7 @@ adapter = new ViewPagerAdapter<String>(context) {
 for more features , you can extend its Base Adapter
 
 # Others
-* onEmptyData() and onHasData() callback , when data size is 0 . Usesful for display and hide empty tip view.
+* onEmptyData() and onHasData() callback , when data size is 0 . Use to display and hide empty tip view.
 
 # Dependencies
 ```groovy

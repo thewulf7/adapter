@@ -1,17 +1,17 @@
-# Adapter
+## Adapter
 A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. Multiple view type is supported for ListView ,GrideView ,RecyclerView.
 <p>[中文教程](http://www.jianshu.com/p/f18f77255952)
 <p>
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/exam.gif)
-# Features
+## Features
 * Based on template type
 * Simple and clean api
 * Super esay to use and Much less code
 * Multiple view type support for ListView 、GrideView 、RecyclerView
 
-## BaseAdapterHelper
+### BaseAdapterHelper
 * ```setText()``` Calls ```setText(String)``` on any TextView.
 * ```setAlpha()``` Calls ```setAlpha(float)``` on any View.
 * ```setVisible()``` Calls ```setVisibility(int)``` on any View.
@@ -32,12 +32,12 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 * ```setChecked()```
 * ```setAdapter()```
 
-# Gradle
+## Gradle
 ```groovy
 compile 'com.github.thepacific:adapter:{lastest version}'
 ```
 
-# RecyclerView , ListView , GrideView
+## RecyclerView , ListView , GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
   
@@ -116,7 +116,7 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.lay
 ```
 for more features , you can extend their Base Adapter
 
-# ExpandableListView
+## ExpandableListView
 * ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
 * Need to override getChildren(),convertGroupView() and convertChildView()
 ```java
@@ -147,7 +147,7 @@ adapter = new ExpandableAdapter<MenuBean, ExploreBean>(context, R.layout.item_gr
 ```
 for more features , you can extend its Base Adapter
 
-# ViewPager
+## ViewPager
 * ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
 
 #### With layout
@@ -185,20 +185,21 @@ adapter = new ViewPagerAdapter<String>(context) {
 ```
 for more features , you can extend its Base Adapter
 
-# Others
+## Others
 * onEmptyData() and onHasData() callback , when data size is 0 . Use to display and hide empty tip view.
 
-# Dependencies
+## Dependencies
 ```groovy
 compile 'com.github.bumptech.glide:glide:3.7.0'
 compile 'com.android.support:recyclerview-v7:23.3.0'
 ```
 
-#Thanks
+##Thanks
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .
 * Thanks JoaZapata(https://github.com/JoanZapata) for his great job .
 
-# Simplified BSD License  
+## Simplified BSD License  
+
 Copyright (c) 2016 The Pacific All rights reserved.  
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 

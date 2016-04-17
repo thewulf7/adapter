@@ -3,6 +3,8 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 <p>[中文教程](http://www.jianshu.com/p/f18f77255952)
 <p>
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
+
+[![Android Arsenal]()](http://android-arsenal.com/details/1/3449)
 <p>
 ![](https://github.com/ThePacific/QuickAdapter/blob/master/art/exam.gif)
 ## Features

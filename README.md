@@ -201,5 +201,5 @@ compile 'com.android.support:recyclerview-v7:23.3.0'
 * Inspired by JoanZapata's base-adapter-helper (https://github.com/JoanZapata/base-adapter-helper) .
 * Thanks JoaZapata(https://github.com/JoanZapata) for his great job .
 
-## Simplified BSD License  
+## License  
 [The MIT License ](https://opensource.org/licenses/MIT)

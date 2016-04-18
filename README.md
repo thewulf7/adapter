@@ -182,6 +182,7 @@ adapter = new ViewPagerAdapter<String>(context) {
                 imageView.setId(R.id.img_view);
                 fl.addView(imageView);
                 imageView.setLayoutParams(lp);
+                // don't add fl to container , it does in helper
                 return fl;
             }
         };

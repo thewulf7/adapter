@@ -1,5 +1,5 @@
 ## Adapter
-A quick adapter library for ListView , GridView , RecyclerView, ViewPager and ExpandableListView on android. Multiple view type is supported for ListView ,GrideView ,RecyclerView.
+A quick adapter library for ListView, GridView, RecyclerView, ViewPager, and ExpandableListView on Android. Multiple view types is supported for ListView, GrideView, and RecyclerView.
 
 [ ![Download](https://api.bintray.com/packages/thepacific/maven/adapter/images/download.svg) ](https://bintray.com/thepacific/maven/adapter/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Adapter-green.svg?style=true)](https://android-arsenal.com/details/1/3449)
@@ -10,23 +10,23 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 
 ## Features
 * Based on template type
-* Simple and clean api
-* Super esay to use and Much less code
-* Multiple view type support for ListView 、GrideView 、RecyclerView
+* Simple and clean API
+* Super easy to use and much less code
+* Multiple view type support for ListView, GrideView, and RecyclerView
 
 ### BaseAdapterHelper
-* ```setText()``` Calls ```setText(String)``` on any TextView.
-* ```setAlpha()``` Calls ```setAlpha(float)``` on any View.
-* ```setVisible()``` Calls ```setVisibility(int)``` on any View.
-* ```linkify()``` Calls ```Linkify.addLinks(view, ALL)``` on any TextView.
-* ```setTypeface()``` Calls ```setTypeface(Typeface)``` on any TextView.
-* ```setProgress()``` Calls ```setProgress(int)``` on any ProgressBar.
-* ```setMax()``` Calls ```setMax(int)``` on any ProgressBar.
-* ```setRating()``` Calls ```setRating(int)``` on any RatingBar.
-* ```setImageResource()``` Calls ```setImageResource(int)``` on any ImageView.
-* ```setImageDrawable()``` Calls ```setImageDrawable(Drawable)``` on any ImageView.
-* ```setImageBitmap()``` Calls ```setImageBitmap(Bitmap)``` on any ImageView.
-* ```setImageUrl()``` Uses [Glide](https://github.com/bumptech/glide) to download the image and put it in an ImageView.
+* ```setText()``` calls ```setText(String)``` on any TextView.
+* ```setAlpha()``` calls ```setAlpha(float)``` on any View.
+* ```setVisible()``` calls ```setVisibility(int)``` on any View.
+* ```linkify()``` calls ```Linkify.addLinks(view, ALL)``` on any TextView.
+* ```setTypeface()``` calls ```setTypeface(Typeface)``` on any TextView.
+* ```setProgress()``` calls ```setProgress(int)``` on any ProgressBar.
+* ```setMax()``` calls ```setMax(int)``` on any ProgressBar.
+* ```setRating()``` calls ```setRating(int)``` on any RatingBar.
+* ```setImageResource()``` calls ```setImageResource(int)``` on any ImageView.
+* ```setImageDrawable()``` calls ```setImageDrawable(Drawable)``` on any ImageView.
+* ```setImageBitmap()``` calls ```setImageBitmap(Bitmap)``` on any ImageView.
+* ```setImageUrl()``` uses [Glide](https://github.com/bumptech/glide) to download the image and put it in an ImageView.
 * ```setOnClickListener()```
 * ```setOnTouchListener()```
 * ```setOnLongClickListener()```
@@ -40,7 +40,7 @@ A quick adapter library for ListView , GridView , RecyclerView, ViewPager and Ex
 compile 'com.github.thepacific:adapter:{lastest version}'
 ```
 
-## RecyclerView , ListView , GrideView
+## RecyclerView, ListView, and GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
   
@@ -64,8 +64,8 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item) {
         };      
 ```
 
-#### Multiple view type layout
-* Need to override convert(),getItemViewType() and getLayoutResId()
+#### Multiple view types layout
+* Need to override convert(), getItemViewType(), and getLayoutResId()
 ```java
 adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.layout.item1) {
             @Override
@@ -86,8 +86,8 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.lay
             }
 
             /**
-             * Must be overridden , when you have more than one item layout.
-             * No need to be overridden , when you only have one item layout.
+             * Must be overridden, when you have more than one item layout.
+             * No need to be overridden, when you only have one item layout.
              */
             @Override
             public int getItemViewType(int position) {
@@ -102,8 +102,8 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.lay
 
             /**
              * Get layoutResId from view type  @see #getItemViewType(int position) return value.
-             * Must be overridden , when you have more than one item layout.
-             * No need to be overridden , when you only have one item layout.
+             * Must be overridden, when you have more than one item layout.
+             * No need to be overridden, when you only have one item layout.
              */
             @Override
             public int getLayoutResId(int viewType) {
@@ -117,7 +117,7 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.lay
             }
         };
 ```
-for more features , you can extend their Base Adapter
+For more features, you can extend their Base Adapter
 
 ## ExpandableListView
 * ExpandableAdapterHelper and ExpandableAdapter for ExpandableListView
@@ -148,10 +148,10 @@ adapter = new ExpandableAdapter<MenuBean, ExploreBean>(context, R.layout.item_gr
             }
         };
 ```
-for more features , you can extend its Base Adapter
+For more features, you can extend its Base Adapter
 
 ## ViewPager
-* ViewPagerAdapter ,FragmentPagerAdapter2 and FragmentStatePagerAdapter2 for ViewPager
+* ViewPagerAdapter, FragmentPagerAdapter2, and FragmentStatePagerAdapter2 for ViewPager
 
 #### With layout
 * Just override convert()
@@ -163,7 +163,7 @@ adapter = new ViewPagerAdapter<String>(context,R.layout.pager_view) {
             }
         };
 ```
-#### Without layout and create view from java code
+#### Without layout and create view from Java code
 
 * Need to override convert() and createView()
 ```java
@@ -173,7 +173,7 @@ adapter = new ViewPagerAdapter<String>(context) {
                 helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
             }
 
-            // just override createView()
+            // Just override createView()
             @Override
             protected View createView(ViewGroup container, int position) {
                 FrameLayout fl = new FrameLayout(context);
@@ -182,15 +182,15 @@ adapter = new ViewPagerAdapter<String>(context) {
                 imageView.setId(R.id.img_view);
                 fl.addView(imageView);
                 imageView.setLayoutParams(lp);
-                // don't add fl to container , it does in helper
+                // Don't add fl to container, it does in helper
                 return fl;
             }
         };
 ```
-for more features , you can extend its Base Adapter
+For more features, you can extend its Base Adapter
 
 ## Others
-* onEmptyData() and onHasData() callback , when data size is 0 . Use to display and hide empty tip view.
+* onEmptyData() and onHasData() callback, when data size is 0. Use to display and hide empty tip view.
 
 ## Dependencies
 ```groovy

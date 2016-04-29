@@ -70,6 +70,7 @@ adapter = new Adapter<ExploreBean>(context, R.layout.item) {
 adapter = new Adapter<ExploreBean>(context, R.layout.item, R.layout.item0, R.layout.item1) {
             @Override
             protected void convert(final AdapterHelper helper, ExploreBean exploreBean) {
+                // RecyclerViewHelper uses helper.getAdapterPosition()
                 final int position = helper.getPosition();
                 if (position % 3 == 0) {
                     helper.setText(R.id.tv_explore_name, "__Index: " + String.valueOf(position));

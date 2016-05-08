@@ -1,8 +1,11 @@
 package com.pacific.example;
 
+import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +14,20 @@ import android.widget.ImageView;
 
 import com.pacific.adapter.PagerAdapterHelper;
 import com.pacific.adapter.ViewPagerAdapter;
+import com.trello.rxlifecycle.ActivityEvent;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerActivity extends AppCompatActivity {
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
+public class ViewPagerActivity extends RxAppCompatActivity {
 
     private ViewPagerAdapter<String> adapter;
 
@@ -26,14 +38,15 @@ public class ViewPagerActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter<String>(this) {
             @Override
             protected void convert(PagerAdapterHelper helper, String item) {
-                helper.setBackgroundRes(R.id.img_view, R.drawable.exa);
+                helper.setImageUrl(R.id.img_view, "file:///"+item);
             }
 
             @Override
             protected View createView(ViewGroup container, int position) {
                 FrameLayout fl = new FrameLayout(context);
                 ImageView imageView = new ImageView(context);
-                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(480, 480, Gravity.CENTER);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(1024, 1024, Gravity.CENTER);
                 imageView.setId(R.id.img_view);
                 fl.addView(imageView);
                 imageView.setLayoutParams(lp);
@@ -41,26 +54,34 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         };
         ((ViewPager) findViewById(R.id.view_pager)).setAdapter(adapter);
-        List<String> urls = new ArrayList<>();
-        urls.add("0");
-        urls.add("1");
-        urls.add("2");
-        urls.add("3");
-        urls.add("4");
-        urls.add("5");
-        urls.add("6");
-        urls.add("7");
-        urls.add("8");
-        urls.add("9");
-        urls.add("11");
-        urls.add("12");
-        urls.add("13");
-        urls.add("14");
-        urls.add("15");
-        urls.add("16");
-        urls.add("17");
-        urls.add("18");
-        urls.add("19");
-        adapter.addAll(urls);
+        loadImageUrl();
+    }
+
+    private void loadImageUrl(){
+        Observable
+                .just(new ArrayList<String>())
+                .compose(this.<List<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .observeOn(Schedulers.newThread())
+                .map(new Func1<List<String>, List<String>>() {
+                    @Override
+                    public List<String> call(List<String> strings) {
+                        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+                        File file =new File(path+File.separator+"Pacific"+File.separator);
+                        for (File f : file.listFiles()) {
+                            if(f.getName().endsWith(".jpg") || (f.getName().endsWith(".png"))){
+                                strings.add(f.getAbsolutePath());
+                            }
+                        }
+                        return strings;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<String>>() {
+                    @Override
+                    public void call(List<String> strings) {
+                        adapter.addAll(strings);
+                    }
+                });
     }
 }

@@ -12,7 +12,7 @@ A quick adapter library for ListView, GridView, RecyclerView, ViewPager, and Exp
 * Based on template type
 * Simple and clean API
 * Super easy to use and much less code
-* Multiple view type support for ListView, GrideView, and RecyclerView
+* Multiple view type support for Spinner,ListView, GrideView, and RecyclerView
 
 ### BaseAdapterHelper
 * ```setText()``` calls ```setText(String)``` on any TextView.
@@ -40,7 +40,7 @@ A quick adapter library for ListView, GridView, RecyclerView, ViewPager, and Exp
 compile 'com.github.thepacific:adapter:{lastest version}'
 ```
 
-## RecyclerView, ListView, and GrideView
+## RecyclerView, ListView, Spinner and GrideView
 * RecyclerAdapterHelper and RecyclerAdapter for RecyclerView
 * AdapterHelper and Adapter for ListView and GridView
   

@@ -1,16 +1,16 @@
-apply plugin: 'com.android.library'
-//apply from: "../gradle/bintray_push.gradle"
+//apply plugin: 'com.android.library'
+apply from: "../gradle/bintray_push.gradle"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
 
         minSdkVersion 9
-        targetSdkVersion 24
-        versionCode 6
-        versionName "1.0.6"
+        targetSdkVersion 25
+        versionCode 8
+        versionName "2.0.0"
     }
 
     buildTypes {
@@ -23,7 +23,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.android.support:support-v4:25.1.1'
 }

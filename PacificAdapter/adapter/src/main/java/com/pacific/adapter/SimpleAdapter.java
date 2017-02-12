@@ -17,30 +17,79 @@
 package com.pacific.adapter;
 
 import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
-public abstract class ViewPagerAdapter<T extends Item> extends PagerAdapter implements DataIO<T> {
+public class SimpleAdapter<T extends Item> extends BaseAdapter implements DataIO<T> {
     protected LayoutInflater inflater;
     protected final ArrayList<T> data;
-    protected Queue<View> cacheViews;
-    protected int currentPosition = -1;
-    protected View currentTarget;
+    protected final int viewTypeCount;
 
-    public ViewPagerAdapter() {
-        this(null);
+    public SimpleAdapter() {
+        this(1);
     }
 
-    public ViewPagerAdapter(List<T> data) {
+    public SimpleAdapter(int viewTypeCount) {
+        this(null, viewTypeCount);
+    }
+
+    public SimpleAdapter(List<T> data, int viewTypeCount) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
-        this.cacheViews = new LinkedList<>();
+        this.viewTypeCount = viewTypeCount;
+    }
+
+    @Override
+    public int getCount() {
+        return size();
+    }
+
+    @Override
+    public T getItem(int position) {
+        return get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return get(position).getViewType();
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return this.viewTypeCount;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        SimpleViewHolder holder;
+        T item = getItem(position);
+        if (convertView == null) {
+            if (inflater == null) {
+                inflater = LayoutInflater.from(parent.getContext());
+            }
+            convertView = inflater.inflate(item.getLayout(), parent, false);
+            holder = new SimpleViewHolder(convertView);
+            convertView.setTag(R.integer.adapter_view_holder, holder);
+        } else {
+            holder = (SimpleViewHolder) convertView.getTag(R.integer.adapter_view_holder);
+        }
+        holder.setPosition(position);
+        item.bind(holder);
+        return convertView;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return position < data.size();
     }
 
     @Override
@@ -196,64 +245,5 @@ public abstract class ViewPagerAdapter<T extends Item> extends PagerAdapter impl
         } else {
             onHasData();
         }
-    }
-
-    @Override
-    public int getCount() {
-        return size();
-    }
-
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view == object;
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        SimpleViewHolder holder;
-        T item = get(position);
-        View convertView = cacheViews.poll();
-        if (convertView == null) {
-            if (inflater == null) {
-                inflater = LayoutInflater.from(container.getContext());
-            }
-            convertView = inflater.inflate(item.getLayout(), container, false);
-            holder = new SimpleViewHolder(convertView);
-            convertView.setTag(R.integer.adapter_view_holder, holder);
-        } else {
-            holder = (SimpleViewHolder) convertView.getTag(R.integer.adapter_view_holder);
-        }
-        holder.setPosition(position);
-        item.bind(holder);
-        container.addView(convertView);
-        return convertView;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        if (object instanceof View) {
-            View view = (View) object;
-            T item = get(position);
-            SimpleViewHolder holder = (SimpleViewHolder) view.getTag(R.integer.adapter_view_holder);
-            item.unbind(holder);
-            container.removeView(view);
-            cacheViews.add(view);
-        }
-    }
-
-    @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        this.currentPosition = position;
-        if (object instanceof View) {
-            this.currentTarget = (View) object;
-        }
-    }
-
-    public int getCurrentPosition() {
-        return currentPosition;
-    }
-
-    public View getCurrentTarget() {
-        return currentTarget;
     }
 }

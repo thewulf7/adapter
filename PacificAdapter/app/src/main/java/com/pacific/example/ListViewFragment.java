@@ -11,17 +11,17 @@ import android.widget.ListView;
 
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
-import com.trello.rxlifecycle.FragmentEvent;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class ListViewFragment extends RxFragment {
 
@@ -127,16 +127,16 @@ public class ListViewFragment extends RxFragment {
                 .just(null)
                 .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribeOn(Schedulers.newThread())
-                .map(new Func1<Object, List<ExploreBean>>() {
+                .map(new Function<Object, List<ExploreBean>>() {
                     @Override
-                    public List<ExploreBean> call(Object o) {
+                    public List<ExploreBean> apply(Object o) {
                         return load();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<ExploreBean>>() {
+                .subscribe(new Consumer<List<ExploreBean>>() {
                     @Override
-                    public void call(List<ExploreBean> list0) {
+                    public void accept(List<ExploreBean> list0) {
                         adapter.addAll(list0);
                     }
                 });

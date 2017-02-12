@@ -11,19 +11,17 @@ import android.widget.ExpandableListView;
 
 import com.pacific.adapter.ExpandableAdapter;
 import com.pacific.adapter.ExpandableAdapterHelper;
-import com.trello.rxlifecycle.FragmentEvent;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.observers.Observers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class ExpandableListViewFragment extends RxFragment {
@@ -102,16 +100,16 @@ public class ExpandableListViewFragment extends RxFragment {
                 .just(null)
                 .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribeOn(Schedulers.newThread())
-                .map(new Func1<Object, List<MenuBean>>() {
+                .map(new Function<Object, List<MenuBean>>() {
                     @Override
-                    public List<MenuBean> call(Object o) {
+                    public List<MenuBean> apply(Object o) {
                         return load();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<MenuBean>>() {
+                .subscribe(new Consumer<List<MenuBean>>() {
                     @Override
-                    public void call(List<MenuBean> list0) {
+                    public void accept(List<MenuBean> list0) {
                         adapter.addAll(list0);
                     }
                 });

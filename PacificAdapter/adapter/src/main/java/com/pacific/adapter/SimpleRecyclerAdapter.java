@@ -29,17 +29,17 @@ import java.util.List;
 
 import static android.support.v7.widget.RecyclerView.NO_POSITION;
 
-public class RecyclerAdapter<T extends RecyclerItem> extends Adapter<SimpleRecyclerViewHolder> implements DataIO<T> {
+public class SimpleRecyclerAdapter<T extends RecyclerItem> extends Adapter<SimpleRecyclerViewHolder> implements DataIO<T> {
 
     protected LayoutInflater inflater;
     protected final ArrayList<T> data;
     private int flagPosition = -1;
 
-    public RecyclerAdapter() {
+    public SimpleRecyclerAdapter() {
         this(null);
     }
 
-    public RecyclerAdapter(List<T> data) {
+    public SimpleRecyclerAdapter(List<T> data) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
     }
 

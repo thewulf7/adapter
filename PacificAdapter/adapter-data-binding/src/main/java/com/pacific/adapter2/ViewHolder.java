@@ -14,48 +14,26 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
-import android.view.View;
+import android.databinding.ViewDataBinding;
 
-/**
- * ViewHolder for {@link BaseAbsAdapter} and {@link BasePagerAdapter2}
- */
 public class ViewHolder {
-
-    /**
-     * data binding for view
-     */
-    public final DataBinding binding;
-
-    /**
-     * item view
-     */
-    public final View itemView;
-    /**
-     * item position
-     */
+    private final ViewDataBinding binding;
     private int position = -1;
 
-    public ViewHolder(View itemView) {
-        this.itemView = itemView;
-        this.binding = new DataBinding(itemView);
+    public ViewHolder(ViewDataBinding binding) {
+        this.binding = binding;
     }
 
-    /**
-     * get adapter position
-     *
-     * @return position of item view
-     */
+    public <T extends ViewDataBinding> T binding() {
+        return (T) this.binding;
+    }
+
     public int getPosition() {
         return position;
     }
 
-    /**
-     * set adapter position
-     *
-     * @param position
-     */
     public void setPosition(int position) {
         this.position = position;
     }

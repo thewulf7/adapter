@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
+import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -36,8 +37,7 @@ public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerIte
         if (inflater == null) {
             inflater = LayoutInflater.from(parent.getContext());
         }
-        return new RecyclerViewHolder(
-                inflater.inflate(get(flagPosition).getLayout(), parent, false)) {
-        };
+        int layout = get(flagPosition).getLayout();
+        return new RecyclerViewHolder(DataBindingUtil.inflate(inflater, layout, parent, false));
     }
 }

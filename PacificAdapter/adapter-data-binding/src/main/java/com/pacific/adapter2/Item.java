@@ -14,30 +14,9 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
-public interface RecyclerItem<T extends RecyclerViewHolder> {
-
-    AtomicLong ID_COUNTER = new AtomicLong(0);
-
-    void bindPayloads(T holder, List<Object> payloads);
-
-    int getSpanSize(int spanCount, int position);
-
-    void onViewAttachedToWindow(T holder);
-
-    void onViewDetachedFromWindow(T holder);
-
-    boolean isRecyclable();
-
-    /**
-     * @return item id
-     */
-    long diffId();
-
+public interface Item<T extends ViewHolder> {
     /**
      * @return item view type
      */

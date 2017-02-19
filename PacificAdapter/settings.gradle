@@ -1,2 +1,1 @@
-//include 'app','adapter'
-include 'adapter'
+include ':demo', 'adapter',':adapter-data-binding'

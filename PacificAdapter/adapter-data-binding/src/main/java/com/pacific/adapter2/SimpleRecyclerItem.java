@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
 import java.util.List;
 
 public abstract class SimpleRecyclerItem implements RecyclerItem<RecyclerViewHolder> {
+
+    @Override
+    public int getViewType() {
+        return 0;
+    }
 
     @Override
     public void bindPayloads(RecyclerViewHolder holder, List<Object> payloads) {
@@ -49,10 +54,5 @@ public abstract class SimpleRecyclerItem implements RecyclerItem<RecyclerViewHol
     @Override
     public long diffId() {
         return ID_COUNTER.decrementAndGet();
-    }
-
-    @Override
-    public int getViewType() {
-        return 0;
     }
 }

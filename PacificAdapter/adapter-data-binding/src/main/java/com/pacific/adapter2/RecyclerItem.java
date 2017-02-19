@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;

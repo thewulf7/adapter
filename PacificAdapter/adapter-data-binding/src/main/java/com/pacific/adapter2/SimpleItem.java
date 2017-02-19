@@ -14,30 +14,15 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
-public interface Item<T extends ViewHolder> {
-    /**
-     * @return item view type
-     */
-    int getViewType();
+public abstract class SimpleItem implements Item<ViewHolder> {
+    @Override
+    public int getViewType() {
+        return 0;
+    }
 
-    /**
-     * @return item view layout resource id
-     */
-    int getLayout();
-
-    /**
-     * bind data callback
-     *
-     * @param holder view holder
-     */
-    void bind(T holder);
-
-    /**
-     * unbind data callback
-     *
-     * @param holder view holder
-     */
-    void unbind(T holder);
+    @Override
+    public void unbind(ViewHolder holder) {
+    }
 }

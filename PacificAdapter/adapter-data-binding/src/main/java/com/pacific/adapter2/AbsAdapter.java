@@ -14,30 +14,26 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter2;
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.databinding.ViewDataBinding;
 
 import java.util.List;
 
-public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerItem, RecyclerViewHolder> {
-
-    public RecyclerAdapter() {
-        super();
+public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, ViewHolder> {
+    public AbsAdapter() {
     }
 
-    public RecyclerAdapter(List<SimpleRecyclerItem> data) {
-        super(data);
+    public AbsAdapter(int viewTypeCount) {
+        super(viewTypeCount);
+    }
+
+    public AbsAdapter(List<SimpleItem> data, int viewTypeCount) {
+        super(data, viewTypeCount);
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (inflater == null) {
-            inflater = LayoutInflater.from(parent.getContext());
-        }
-        return new RecyclerViewHolder(
-                inflater.inflate(get(flagPosition).getLayout(), parent, false)) {
-        };
+    protected ViewHolder createViewHolder(ViewDataBinding binding) {
+        return new ViewHolder(binding);
     }
 }

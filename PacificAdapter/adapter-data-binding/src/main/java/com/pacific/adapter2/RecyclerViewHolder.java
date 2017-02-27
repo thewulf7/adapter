@@ -20,7 +20,7 @@ import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-    private final ViewDataBinding binding;
+    private ViewDataBinding binding;
 
     public RecyclerViewHolder(ViewDataBinding binding) {
         super(binding.getRoot());

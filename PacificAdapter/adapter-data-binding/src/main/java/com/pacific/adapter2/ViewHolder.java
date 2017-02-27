@@ -19,7 +19,7 @@ package com.pacific.adapter2;
 import android.databinding.ViewDataBinding;
 
 public class ViewHolder {
-    private final ViewDataBinding binding;
+    private ViewDataBinding binding;
     private int position = -1;
 
     public ViewHolder(ViewDataBinding binding) {

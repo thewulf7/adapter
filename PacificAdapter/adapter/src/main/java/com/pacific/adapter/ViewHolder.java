@@ -26,7 +26,7 @@ public class ViewHolder {
     /**
      * data binding for view
      */
-    public final DataBinding binding;
+    public final ViewDataBinding binding;
 
     /**
      * item view
@@ -39,7 +39,7 @@ public class ViewHolder {
 
     public ViewHolder(View itemView) {
         this.itemView = itemView;
-        this.binding = new DataBinding(itemView);
+        this.binding = new ViewDataBinding(itemView);
     }
 
     /**

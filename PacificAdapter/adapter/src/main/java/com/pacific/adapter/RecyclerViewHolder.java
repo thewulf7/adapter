@@ -23,10 +23,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     /**
      * data binding for view
      */
-    public final DataBinding binding;
+    public final ViewDataBinding binding;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
-        this.binding = new DataBinding(itemView);
+        this.binding = new ViewDataBinding(itemView);
     }
 }

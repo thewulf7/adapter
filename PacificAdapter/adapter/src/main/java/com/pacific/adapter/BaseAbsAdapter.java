@@ -16,11 +16,14 @@
 
 package com.pacific.adapter;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +34,12 @@ import java.util.List;
  * @param <T> type Item
  */
 public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
-        extends BaseAdapter implements DataIO<T> {
+        extends BaseAdapter implements DataIO<T>, ListenerProvider {
     protected LayoutInflater inflater;
     protected final ArrayList<T> data;
     protected final int viewTypeCount;
     protected OnDataSetChanged onDataSetChanged;
+    protected ListenerProviderImpl provider;
 
     public BaseAbsAdapter() {
         this(1);
@@ -47,6 +51,7 @@ public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
 
     public BaseAbsAdapter(List<T> data, int viewTypeCount) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
+        this.provider = new ListenerProviderImpl();
         this.viewTypeCount = viewTypeCount;
     }
 
@@ -89,7 +94,8 @@ public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
         } else {
             holder = (H) convertView.getTag(R.integer.adapter_view_holder);
         }
-        holder.setPosition(position);
+        holder.setCurrentPosition(position);
+        holder.setCurrentItem(item);
         item.bind(holder);
         return convertView;
     }
@@ -263,5 +269,68 @@ public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
         this.onDataSetChanged = onDataSetChanged;
     }
 
+    @Override
+    public void clearListeners() {
+        provider.clearListeners();
+    }
+
+    @Override
+    public void addOnClickListener(@LayoutRes int layout, View.OnClickListener listener) {
+        provider.addOnClickListener(layout, listener);
+    }
+
+    @Override
+    public View.OnClickListener getOnClickListener(@LayoutRes int layout) {
+        return provider.getOnClickListener(layout);
+    }
+
+    @Override
+    public void addOnTouchListener(@LayoutRes int layout, View.OnTouchListener listener) {
+        provider.addOnTouchListener(layout, listener);
+    }
+
+    @Override
+    public View.OnTouchListener getOnTouchListener(@LayoutRes int layout) {
+        return provider.getOnTouchListener(layout);
+    }
+
+    @Override
+    public void addOnLongClickListener(@LayoutRes int layout, View.OnLongClickListener listener) {
+        provider.addOnLongClickListener(layout, listener);
+    }
+
+    @Override
+    public View.OnLongClickListener getOnLongClickListener(@LayoutRes int layout) {
+        return provider.getOnLongClickListener(layout);
+    }
+
+    @Override
+    public void addOnCheckedChangeListener(@LayoutRes int layout,
+                                           CompoundButton.OnCheckedChangeListener listener) {
+        provider.addOnCheckedChangeListener(layout, listener);
+    }
+
+    @Override
+    public CompoundButton.OnCheckedChangeListener getOnCheckedChangeListener(@LayoutRes int layout) {
+        return provider.getOnCheckedChangeListener(layout);
+    }
+
+    @Override
+    public void addGroupOnCheckedChangeListener(@LayoutRes int layout,
+                                                RadioGroup.OnCheckedChangeListener listener) {
+        provider.addGroupOnCheckedChangeListener(layout, listener);
+    }
+
+    @Override
+    public RadioGroup.OnCheckedChangeListener getGroupOnCheckedChangeListener(@LayoutRes int layout) {
+        return provider.getGroupOnCheckedChangeListener(layout);
+    }
+
+    /**
+     * create SimpleViewHolder
+     *
+     * @param convertView item view
+     * @return SimpleViewHolder
+     */
     protected abstract H createViewHolder(View convertView);
 }

@@ -20,7 +20,7 @@ import android.databinding.ViewDataBinding;
 
 import java.util.List;
 
-public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, ViewHolder> {
+public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, SimpleViewHolder> {
     public AbsAdapter() {
     }
 
@@ -33,7 +33,7 @@ public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, ViewHolder> {
     }
 
     @Override
-    protected ViewHolder createViewHolder(ViewDataBinding binding) {
-        return new ViewHolder(binding);
+    protected SimpleViewHolder createViewHolder(ViewDataBinding binding) {
+        return new SimpleViewHolder(binding);
     }
 }

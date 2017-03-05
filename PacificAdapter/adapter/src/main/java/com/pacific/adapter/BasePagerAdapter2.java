@@ -16,11 +16,14 @@
 
 package com.pacific.adapter;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -31,13 +34,14 @@ import java.util.Queue;
  * PagerAdapter for ViewPager
  */
 public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
-        extends PagerAdapter implements DataIO<T> {
+        extends PagerAdapter implements DataIO<T>, ListenerProvider {
     protected LayoutInflater inflater;
     protected final ArrayList<T> data;
     protected Queue<View> cacheViews;
     protected int currentPosition = -1;
     protected View currentTarget;
     protected OnDataSetChanged onDataSetChanged;
+    protected ListenerProvider provider;
 
     public BasePagerAdapter2() {
         this(null);
@@ -45,6 +49,7 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
 
     public BasePagerAdapter2(List<T> data) {
         this.data = data == null ? new ArrayList<T>() : new ArrayList<>(data);
+        this.provider = new ListenerProviderImpl();
         this.cacheViews = new LinkedList<>();
     }
 
@@ -210,7 +215,8 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
         } else {
             holder = (H) convertView.getTag(R.integer.adapter_view_holder);
         }
-        holder.setPosition(position);
+        holder.setCurrentPosition(position);
+        holder.setCurrentItem(item);
         item.bind(holder);
         container.addView(convertView);
         return convertView;
@@ -266,5 +272,68 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
         return currentTarget;
     }
 
+    @Override
+    public void clearListeners() {
+        provider.clearListeners();
+    }
+
+    @Override
+    public void addOnClickListener(@LayoutRes int layout, View.OnClickListener listener) {
+        provider.addOnClickListener(layout, listener);
+    }
+
+    @Override
+    public View.OnClickListener getOnClickListener(@LayoutRes int layout) {
+        return provider.getOnClickListener(layout);
+    }
+
+    @Override
+    public void addOnTouchListener(@LayoutRes int layout, View.OnTouchListener listener) {
+        provider.addOnTouchListener(layout, listener);
+    }
+
+    @Override
+    public View.OnTouchListener getOnTouchListener(@LayoutRes int layout) {
+        return provider.getOnTouchListener(layout);
+    }
+
+    @Override
+    public void addOnLongClickListener(@LayoutRes int layout, View.OnLongClickListener listener) {
+        provider.addOnLongClickListener(layout, listener);
+    }
+
+    @Override
+    public View.OnLongClickListener getOnLongClickListener(@LayoutRes int layout) {
+        return provider.getOnLongClickListener(layout);
+    }
+
+    @Override
+    public void addOnCheckedChangeListener(@LayoutRes int layout,
+                                           CompoundButton.OnCheckedChangeListener listener) {
+        provider.addOnCheckedChangeListener(layout, listener);
+    }
+
+    @Override
+    public CompoundButton.OnCheckedChangeListener getOnCheckedChangeListener(@LayoutRes int layout) {
+        return provider.getOnCheckedChangeListener(layout);
+    }
+
+    @Override
+    public void addGroupOnCheckedChangeListener(@LayoutRes int layout,
+                                                RadioGroup.OnCheckedChangeListener listener) {
+        provider.addGroupOnCheckedChangeListener(layout, listener);
+    }
+
+    @Override
+    public RadioGroup.OnCheckedChangeListener getGroupOnCheckedChangeListener(@LayoutRes int layout) {
+        return provider.getGroupOnCheckedChangeListener(layout);
+    }
+
+    /**
+     * create SimpleViewHolder
+     *
+     * @param convertView item view
+     * @return SimpleViewHolder
+     */
     protected abstract H createViewHolder(View convertView);
 }

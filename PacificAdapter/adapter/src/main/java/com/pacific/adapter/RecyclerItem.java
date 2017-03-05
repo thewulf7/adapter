@@ -19,7 +19,7 @@ package com.pacific.adapter;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-public interface RecyclerItem<T extends RecyclerViewHolder> {
+public interface RecyclerItem<T extends ViewHolder> extends Item<T> {
 
     AtomicLong ID_COUNTER = new AtomicLong(0);
 
@@ -37,28 +37,4 @@ public interface RecyclerItem<T extends RecyclerViewHolder> {
      * @return item id
      */
     long diffId();
-
-    /**
-     * @return item view type
-     */
-    int getViewType();
-
-    /**
-     * @return item view layout resource id
-     */
-    int getLayout();
-
-    /**
-     * bind data callback
-     *
-     * @param holder view holder
-     */
-    void bind(T holder);
-
-    /**
-     * unbind data callback
-     *
-     * @param holder view holder
-     */
-    void unbind(T holder);
 }

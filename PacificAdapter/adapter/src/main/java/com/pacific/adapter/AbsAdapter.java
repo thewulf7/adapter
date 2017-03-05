@@ -22,6 +22,6 @@ public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, ViewHolder> {
 
     @Override
     protected ViewHolder createViewHolder(View convertView) {
-        return new ViewHolder(convertView);
+        return new ViewHolder(convertView, this);
     }
 }

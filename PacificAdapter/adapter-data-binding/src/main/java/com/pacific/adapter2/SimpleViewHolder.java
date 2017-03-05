@@ -16,28 +16,21 @@
 
 package com.pacific.adapter2;
 
-public interface Item<T extends ViewHolder> {
-    /**
-     * @return item view type
-     */
-    int getViewType();
+import android.databinding.ViewDataBinding;
+import android.view.View;
 
-    /**
-     * @return item view layout resource id
-     */
-    int getLayout();
+import com.pacific.adapter.core.ListenerProvider;
+import com.pacific.adapter.core.ViewHolder;
 
-    /**
-     * bind data callback
-     *
-     * @param holder view holder
-     */
-    void bind(T holder);
+public class SimpleViewHolder extends ViewHolder {
+    private ViewDataBinding binding;
 
-    /**
-     * unbind data callback
-     *
-     * @param holder view holder
-     */
-    void unbind(T holder);
+    public SimpleViewHolder(View itemView, ListenerProvider provider) {
+        super(itemView, provider);
+        this.binding = binding;
+    }
+
+    public <T extends ViewDataBinding> T binding() {
+        return (T) this.binding;
+    }
 }

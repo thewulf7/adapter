@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerItem, RecyclerViewHolder> {
+public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerItem, ViewHolder> {
 
     public RecyclerAdapter() {
         super();
@@ -32,12 +32,13 @@ public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerIte
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (inflater == null) {
             inflater = LayoutInflater.from(parent.getContext());
         }
-        return new RecyclerViewHolder(
-                inflater.inflate(get(flagPosition).getLayout(), parent, false)) {
+        return new ViewHolder(
+                inflater.inflate(get(flagPosition).getLayout(), parent, false),
+                this) {
         };
     }
 }

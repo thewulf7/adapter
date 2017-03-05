@@ -16,9 +16,11 @@
 
 package com.pacific.adapter2;
 
+import com.pacific.adapter.core.RecyclerItem;
+
 import java.util.List;
 
-public abstract class SimpleRecyclerItem implements RecyclerItem<RecyclerViewHolder> {
+public abstract class SimpleRecyclerItem implements RecyclerItem<SimpleViewHolder> {
 
     @Override
     public int getViewType() {
@@ -26,7 +28,7 @@ public abstract class SimpleRecyclerItem implements RecyclerItem<RecyclerViewHol
     }
 
     @Override
-    public void bindPayloads(RecyclerViewHolder holder, List<Object> payloads) {
+    public void bindPayloads(SimpleViewHolder holder, List<Object> payloads) {
     }
 
     @Override
@@ -35,15 +37,15 @@ public abstract class SimpleRecyclerItem implements RecyclerItem<RecyclerViewHol
     }
 
     @Override
-    public void unbind(RecyclerViewHolder holder) {
+    public void unbind(SimpleViewHolder holder) {
     }
 
     @Override
-    public void onViewAttachedToWindow(RecyclerViewHolder holder) {
+    public void onViewAttachedToWindow(SimpleViewHolder holder) {
     }
 
     @Override
-    public void onViewDetachedFromWindow(RecyclerViewHolder holder) {
+    public void onViewDetachedFromWindow(SimpleViewHolder holder) {
     }
 
     @Override

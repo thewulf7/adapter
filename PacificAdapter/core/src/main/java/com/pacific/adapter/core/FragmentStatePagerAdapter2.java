@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter2;
+package com.pacific.adapter.core;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
-public abstract class FragmentPagerAdapter2 extends FragmentPagerAdapter {
+public abstract class FragmentStatePagerAdapter2 extends FragmentStatePagerAdapter {
     protected int currentPosition = -1;
     protected Fragment currentFragment;
 
-    public FragmentPagerAdapter2(FragmentManager fm) {
+    public FragmentStatePagerAdapter2(FragmentManager fm) {
         super(fm);
     }
 

@@ -20,7 +20,7 @@ import android.databinding.ViewDataBinding;
 
 import java.util.List;
 
-public class PagerAdapter2 extends BasePagerAdapter2<SimpleItem, ViewHolder> {
+public class PagerAdapter2 extends BasePagerAdapter2<SimpleItem, SimpleViewHolder> {
     public PagerAdapter2() {
         super();
     }
@@ -30,7 +30,7 @@ public class PagerAdapter2 extends BasePagerAdapter2<SimpleItem, ViewHolder> {
     }
 
     @Override
-    protected ViewHolder createViewHolder(ViewDataBinding binding) {
-        return new ViewHolder(binding);
+    protected SimpleViewHolder createViewHolder(ViewDataBinding binding) {
+        return new SimpleViewHolder(binding);
     }
 }

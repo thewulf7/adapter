@@ -20,9 +20,11 @@ import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.pacific.adapter.core.BaseRecyclerAdapter;
+
 import java.util.List;
 
-public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerItem, RecyclerViewHolder> {
+public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerItem, SimpleViewHolder> {
 
     public RecyclerAdapter() {
         super();
@@ -33,11 +35,11 @@ public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerIte
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (inflater == null) {
             inflater = LayoutInflater.from(parent.getContext());
         }
         int layout = get(flagPosition).getLayout();
-        return new RecyclerViewHolder(DataBindingUtil.inflate(inflater, layout, parent, false));
+        return new SimpleViewHolder(DataBindingUtil.inflate(inflater, layout, parent, false));
     }
 }

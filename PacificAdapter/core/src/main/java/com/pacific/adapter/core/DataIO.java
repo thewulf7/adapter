@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter2;
+package com.pacific.adapter.core;
 
 import android.support.annotation.NonNull;
 
 import java.util.List;
 
-public interface DataIO<T> {
+interface DataIO<T> {
 
     int size();
 

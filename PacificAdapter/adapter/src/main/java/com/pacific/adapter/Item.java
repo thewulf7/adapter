@@ -16,7 +16,10 @@
 
 package com.pacific.adapter;
 
+import android.support.annotation.LayoutRes;
+
 public interface Item<T extends ViewHolder> {
+
     /**
      * @return item view type
      */
@@ -25,6 +28,7 @@ public interface Item<T extends ViewHolder> {
     /**
      * @return item view layout resource id
      */
+    @LayoutRes
     int getLayout();
 
     /**

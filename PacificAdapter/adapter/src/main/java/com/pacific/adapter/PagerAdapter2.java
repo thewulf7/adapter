@@ -2,6 +2,8 @@ package com.pacific.adapter;
 
 import android.view.View;
 
+import java.util.List;
+
 /*
  * Copyright (C) 2017 The Android Open Source Project
  *
@@ -18,8 +20,6 @@ import android.view.View;
  * limitations under the License.
  */
 
-import java.util.List;
-
 /**
  * PagerAdapter for ViewPager
  */
@@ -35,6 +35,6 @@ public final class PagerAdapter2 extends BasePagerAdapter2<SimpleItem, ViewHolde
 
     @Override
     protected ViewHolder createViewHolder(View convertView) {
-        return new ViewHolder(convertView);
+        return new ViewHolder(convertView, this);
     }
 }

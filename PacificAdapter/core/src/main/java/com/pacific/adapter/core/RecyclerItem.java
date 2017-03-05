@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter2;
+package com.pacific.adapter.core;
 
-import android.databinding.ViewDataBinding;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
-public class ViewHolder {
-    private ViewDataBinding binding;
-    private int position = -1;
+public interface RecyclerItem<T extends ViewHolder> extends Item<T> {
 
-    public ViewHolder(ViewDataBinding binding) {
-        this.binding = binding;
-    }
+    AtomicLong ID_COUNTER = new AtomicLong(0);
 
-    public <T extends ViewDataBinding> T binding() {
-        return (T) this.binding;
-    }
+    void bindPayloads(T holder, List<Object> payloads);
 
-    public int getPosition() {
-        return position;
-    }
+    int getSpanSize(int spanCount, int position);
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
+    void onViewAttachedToWindow(T holder);
+
+    void onViewDetachedFromWindow(T holder);
+
+    boolean isRecyclable();
+
+    /**
+     * @return item id
+     */
+    long diffId();
 }

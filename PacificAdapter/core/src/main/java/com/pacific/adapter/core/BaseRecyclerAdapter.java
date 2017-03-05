@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter.core;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;

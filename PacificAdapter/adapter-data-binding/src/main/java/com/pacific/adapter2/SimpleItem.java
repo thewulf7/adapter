@@ -16,13 +16,15 @@
 
 package com.pacific.adapter2;
 
-public abstract class SimpleItem implements Item<ViewHolder> {
+import com.pacific.adapter.core.Item;
+
+public abstract class SimpleItem implements Item<SimpleViewHolder> {
     @Override
     public int getViewType() {
         return 0;
     }
 
     @Override
-    public void unbind(ViewHolder holder) {
+    public void unbind(SimpleViewHolder holder) {
     }
 }

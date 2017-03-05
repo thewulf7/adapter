@@ -1,1 +1,1 @@
-include ':demo', 'adapter',':adapter-data-binding'
+include ':demo', 'adapter'

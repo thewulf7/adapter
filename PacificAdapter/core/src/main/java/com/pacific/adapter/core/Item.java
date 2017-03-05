@@ -14,20 +14,34 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter2;
+package com.pacific.adapter.core;
 
-import android.databinding.ViewDataBinding;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.LayoutRes;
 
-public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-    private ViewDataBinding binding;
+public interface Item<T extends ViewHolder> {
 
-    public RecyclerViewHolder(ViewDataBinding binding) {
-        super(binding.getRoot());
-        this.binding = binding;
-    }
+    /**
+     * @return item view type
+     */
+    int getViewType();
 
-    public <T extends ViewDataBinding> T binding() {
-        return (T) this.binding;
-    }
+    /**
+     * @return item view layout resource id
+     */
+    @LayoutRes
+    int getLayout();
+
+    /**
+     * bind data callback
+     *
+     * @param holder view holder
+     */
+    void bind(T holder);
+
+    /**
+     * unbind data callback
+     *
+     * @param holder view holder
+     */
+    void unbind(T holder);
 }

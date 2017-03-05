@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.pacific.adapter;
+package com.pacific.adapter.core;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttach {
 
     private Object binding;
+
     /**
      * adapter position
      */
@@ -43,17 +43,11 @@ public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttac
         super(itemView);
         this.listenerAttach = new ListenerAttachImpl(provider, itemView);
         try {
-            Class.forName("android.databinding.DataBindingUtil");
+            Class.forName("android.databinding.ViewDataBinding");
             binding = DataBindingUtil.bind(itemView);
         } catch (ClassNotFoundException e) {
             binding = new SimpleViewDataBinding(itemView);
-        } catch (NoClassDefFoundError error) {
-            binding = new SimpleViewDataBinding(itemView);
         }
-        if(binding ==null){
-            binding = new SimpleViewDataBinding(itemView);
-        }
-        Log.e("_______create_______", String.valueOf(binding));
     }
 
     void setCurrentPosition(int position) {

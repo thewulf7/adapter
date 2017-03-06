@@ -41,7 +41,7 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
     protected int currentPosition = -1;
     protected View currentTarget;
     protected OnDataSetChanged onDataSetChanged;
-    protected ListenerProvider provider;
+    protected ListenerProviderImpl provider;
 
     public BasePagerAdapter2() {
         this(null);

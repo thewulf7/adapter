@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * AbsAdapter for AdapterView , like ListView,GridView and Spinner
  */
-public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, ViewHolder> {
+public final class AbsAdapter extends BaseAbsAdapter<Item, ViewHolder> {
     public AbsAdapter() {
         super();
     }
@@ -16,7 +16,7 @@ public final class AbsAdapter extends BaseAbsAdapter<SimpleItem, ViewHolder> {
         super(viewTypeCount);
     }
 
-    public AbsAdapter(List<SimpleItem> data, int viewTypeCount) {
+    public AbsAdapter(List<Item> data, int viewTypeCount) {
         super(data, viewTypeCount);
     }
 

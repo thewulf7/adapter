@@ -18,7 +18,6 @@ package com.pacific.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttach {
@@ -46,14 +45,12 @@ public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttac
             Class.forName("android.databinding.DataBindingUtil");
             binding = DataBindingUtil.bind(itemView);
         } catch (ClassNotFoundException e) {
-            binding = new SimpleViewDataBinding(itemView);
+            binding = new DefaultBinding(itemView);
         } catch (NoClassDefFoundError error) {
-            binding = new SimpleViewDataBinding(itemView);
+            binding = new DefaultBinding(itemView);
+        } catch (IllegalArgumentException e) {
+            binding = new DefaultBinding(itemView);
         }
-        if(binding ==null){
-            binding = new SimpleViewDataBinding(itemView);
-        }
-        Log.e("_______create_______", String.valueOf(binding));
     }
 
     void setCurrentPosition(int position) {

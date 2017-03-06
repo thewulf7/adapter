@@ -23,13 +23,13 @@ import java.util.List;
 /**
  * PagerAdapter for ViewPager
  */
-public final class PagerAdapter2 extends BasePagerAdapter2<SimpleItem, ViewHolder> {
+public final class PagerAdapter2 extends BasePagerAdapter2<Item, ViewHolder> {
 
     public PagerAdapter2() {
         super();
     }
 
-    public PagerAdapter2(List<SimpleItem> data) {
+    public PagerAdapter2(List<Item> data) {
         super(data);
     }
 

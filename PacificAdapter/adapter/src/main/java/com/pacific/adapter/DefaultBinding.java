@@ -37,7 +37,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public final class SimpleViewDataBinding {
+public final class DefaultBinding {
 
     /**
      * View SparseArray, to cache views
@@ -49,7 +49,7 @@ public final class SimpleViewDataBinding {
      */
     private View itemView;
 
-    public SimpleViewDataBinding(View itemView) {
+    public DefaultBinding(View itemView) {
         this.itemView = itemView;
         this.views = new SparseArray<>();
     }
@@ -77,7 +77,7 @@ public final class SimpleViewDataBinding {
      * @param value  text
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setText(int viewId, CharSequence value) {
+    public DefaultBinding setText(int viewId, CharSequence value) {
         TextView view = findView(viewId);
         view.setText(value);
         return this;
@@ -90,7 +90,7 @@ public final class SimpleViewDataBinding {
      * @param stringRes text resource id
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setText(int viewId, @StringRes int stringRes) {
+    public DefaultBinding setText(int viewId, @StringRes int stringRes) {
         TextView view = findView(viewId);
         view.setText(stringRes);
         return this;
@@ -103,7 +103,7 @@ public final class SimpleViewDataBinding {
      * @param imageRes drawable resource id
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setImageResource(int viewId, @DrawableRes int imageRes) {
+    public DefaultBinding setImageResource(int viewId, @DrawableRes int imageRes) {
         ImageView view = findView(viewId);
         view.setImageResource(imageRes);
         return this;
@@ -116,7 +116,7 @@ public final class SimpleViewDataBinding {
      * @param color  color int value , note : not color resource id
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setBackgroundColor(int viewId, @ColorInt int color) {
+    public DefaultBinding setBackgroundColor(int viewId, @ColorInt int color) {
         View view = findView(viewId);
         view.setBackgroundColor(color);
         return this;
@@ -129,7 +129,7 @@ public final class SimpleViewDataBinding {
      * @param backgroundRes drawable resource id
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setBackgroundRes(int viewId, @DrawableRes int backgroundRes) {
+    public DefaultBinding setBackgroundRes(int viewId, @DrawableRes int backgroundRes) {
         View view = findView(viewId);
         view.setBackgroundResource(backgroundRes);
         return this;
@@ -142,7 +142,7 @@ public final class SimpleViewDataBinding {
      * @param textColor color int value , note : not color resource id
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setTextColor(int viewId, @ColorInt int textColor) {
+    public DefaultBinding setTextColor(int viewId, @ColorInt int textColor) {
         TextView view = findView(viewId);
         view.setTextColor(textColor);
         return this;
@@ -155,7 +155,7 @@ public final class SimpleViewDataBinding {
      * @param textColorRes color resource id
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setTextColorRes(int viewId, @ColorRes int textColorRes) {
+    public DefaultBinding setTextColorRes(int viewId, @ColorRes int textColorRes) {
         TextView view = findView(viewId);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setTextColor(itemView.getContext().getResources().getColor(textColorRes, null));
@@ -172,7 +172,7 @@ public final class SimpleViewDataBinding {
      * @param drawable drawable
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setImageDrawable(int viewId, Drawable drawable) {
+    public DefaultBinding setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = findView(viewId);
         view.setImageDrawable(drawable);
         return this;
@@ -185,7 +185,7 @@ public final class SimpleViewDataBinding {
      * @param bitmap bitmap
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setImageBitmap(int viewId, Bitmap bitmap) {
+    public DefaultBinding setImageBitmap(int viewId, Bitmap bitmap) {
         ImageView view = findView(viewId);
         view.setImageBitmap(bitmap);
         return this;
@@ -198,7 +198,7 @@ public final class SimpleViewDataBinding {
      * @param value  alpha value , from 0.0 to 1.0
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setAlpha(int viewId, @FloatRange(from = 0.0, to = 1.0) float value) {
+    public DefaultBinding setAlpha(int viewId, @FloatRange(from = 0.0, to = 1.0) float value) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             findView(viewId).setAlpha(value);
         } else {
@@ -217,7 +217,7 @@ public final class SimpleViewDataBinding {
      * @param visibility View.VISIBLE, View.GONE,View.INVISIBLE
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setVisible(int viewId, int visibility) {
+    public DefaultBinding setVisible(int viewId, int visibility) {
         View view = findView(viewId);
         view.setVisibility(visibility);
         return this;
@@ -230,7 +230,7 @@ public final class SimpleViewDataBinding {
      * @param typeface TypeFace
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setTypeface(int viewId, Typeface typeface) {
+    public DefaultBinding setTypeface(int viewId, Typeface typeface) {
         TextView view = findView(viewId);
         view.setTypeface(typeface);
         view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
@@ -244,7 +244,7 @@ public final class SimpleViewDataBinding {
      * @param typeface TypeFace
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setTypeface(Typeface typeface, int... viewIds) {
+    public DefaultBinding setTypeface(Typeface typeface, int... viewIds) {
         for (int viewId : viewIds) {
             TextView view = findView(viewId);
             view.setTypeface(typeface);
@@ -260,7 +260,7 @@ public final class SimpleViewDataBinding {
      * @param progress value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setProgress(int viewId, int progress) {
+    public DefaultBinding setProgress(int viewId, int progress) {
         ProgressBar view = findView(viewId);
         view.setProgress(progress);
         return this;
@@ -274,7 +274,7 @@ public final class SimpleViewDataBinding {
      * @param max      max value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setProgress(int viewId, int progress, int max) {
+    public DefaultBinding setProgress(int viewId, int progress, int max) {
         ProgressBar view = findView(viewId);
         view.setMax(max);
         view.setProgress(progress);
@@ -288,7 +288,7 @@ public final class SimpleViewDataBinding {
      * @param max    max value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setMax(int viewId, int max) {
+    public DefaultBinding setMax(int viewId, int max) {
         ProgressBar view = findView(viewId);
         view.setMax(max);
         return this;
@@ -301,7 +301,7 @@ public final class SimpleViewDataBinding {
      * @param rating value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setRating(int viewId, float rating) {
+    public DefaultBinding setRating(int viewId, float rating) {
         RatingBar view = findView(viewId);
         view.setRating(rating);
         return this;
@@ -315,7 +315,7 @@ public final class SimpleViewDataBinding {
      * @param max    max value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setRating(int viewId, float rating, int max) {
+    public DefaultBinding setRating(int viewId, float rating, int max) {
         RatingBar view = findView(viewId);
         view.setMax(max);
         view.setRating(rating);
@@ -329,7 +329,7 @@ public final class SimpleViewDataBinding {
      * @param tag    tag value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setTag(int viewId, Object tag) {
+    public DefaultBinding setTag(int viewId, Object tag) {
         View view = findView(viewId);
         view.setTag(tag);
         return this;
@@ -343,7 +343,7 @@ public final class SimpleViewDataBinding {
      * @param tag    tag value
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setTag(int viewId, int key, Object tag) {
+    public DefaultBinding setTag(int viewId, int key, Object tag) {
         View view = findView(viewId);
         view.setTag(key, tag);
         return this;
@@ -356,7 +356,7 @@ public final class SimpleViewDataBinding {
      * @param checked check state
      * @return SimpleViewHolder itself
      */
-    public SimpleViewDataBinding setChecked(int viewId, boolean checked) {
+    public DefaultBinding setChecked(int viewId, boolean checked) {
         View view = findView(viewId);
         if (view instanceof CompoundButton) {
             ((CompoundButton) view).setChecked(checked);

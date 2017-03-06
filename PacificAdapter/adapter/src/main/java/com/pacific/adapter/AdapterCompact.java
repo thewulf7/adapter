@@ -18,6 +18,9 @@ package com.pacific.adapter;
 
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdapterCompact {
     private AdapterCompact() {
         new AssertionError("Not supported");
@@ -33,6 +36,14 @@ public class AdapterCompact {
      */
     public static <V extends View> V findView(View view, int viewId) {
         return (V) view.findViewById(viewId);
+    }
+
+    public static List<RecyclerItem> toRecyclerItems(List list) {
+        return new ArrayList<>(list);
+    }
+
+    public static List<Item> toItems(List list) {
+        return new ArrayList<>(list);
     }
 
     /**

@@ -39,7 +39,7 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
     protected final ArrayList<T> data;
     protected int flagPosition = -1;
     protected OnDataSetChanged onDataSetChanged;
-    protected ListenerProvider provider;
+    protected ListenerProviderImpl provider;
 
     public BaseRecyclerAdapter() {
         this(null);

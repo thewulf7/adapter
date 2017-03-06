@@ -21,13 +21,13 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public final class RecyclerAdapter extends BaseRecyclerAdapter<SimpleRecyclerItem, ViewHolder> {
+public final class RecyclerAdapter extends BaseRecyclerAdapter<RecyclerItem, ViewHolder> {
 
     public RecyclerAdapter() {
         super();
     }
 
-    public RecyclerAdapter(List<SimpleRecyclerItem> data) {
+    public RecyclerAdapter(List<RecyclerItem> data) {
         super(data);
     }
 

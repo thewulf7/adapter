@@ -2,11 +2,12 @@ package com.example.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.demo.entity.ExampleItem;
+import com.example.demo.entity.Item;
+import com.example.demo.entity.ItemDataBinding;
 import com.pacific.adapter.AbsAdapter;
 import com.pacific.adapter.AdapterCompact;
 import com.pacific.adapter.SimpleItem;
@@ -25,24 +26,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.lv);
         adapter = new AbsAdapter();
-        adapter.addOnClickListener(R.layout.item_list_view, new View.OnClickListener() {
+        adapter.addOnClickListener(R.layout.item, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExampleItem item = AdapterCompact.getItem(v);
+                Item item = AdapterCompact.getItem(v);
                 int position = AdapterCompact.getPosition(v);
-                Log.e("_____", String.valueOf(item.getTitle()));
-                Log.e("_____", String.valueOf(position));
+                Toast.makeText(
+                        MainActivity.this, item.getTitle(), Toast.LENGTH_LONG
+                ).show();
             }
         });
         listView.setAdapter(adapter);
-        loadItem();
+        loadItem2();
     }
 
     private void loadItem() {
-        List<SimpleItem> list = new ArrayList<>();
+        List<Item> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            list.add(new ExampleItem("item index is : " + i));
+            list.add(new Item("item index is : " + i));
         }
-        adapter.addAll(list);
+        adapter.addAll(AdapterCompact.toItems(list));
+    }
+
+    private void loadItem2() {
+        List<ItemDataBinding> list = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            list.add(new ItemDataBinding("item index is : " + i));
+        }
+        adapter.addAll(AdapterCompact.toItems(list));
     }
 }

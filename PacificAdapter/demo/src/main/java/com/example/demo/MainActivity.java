@@ -9,8 +9,7 @@ import android.widget.Toast;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.ItemDataBinding;
 import com.pacific.adapter.AbsAdapter;
-import com.pacific.adapter.AdapterCompact;
-import com.pacific.adapter.SimpleItem;
+import com.pacific.adapter.AdapterUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     AbsAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.addOnClickListener(R.layout.item, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Item item = AdapterCompact.getItem(v);
-                int position = AdapterCompact.getPosition(v);
+                Item item = AdapterUtil.getItem(v);
+                int position = AdapterUtil.getPosition(v);
                 Toast.makeText(
                         MainActivity.this, item.getTitle(), Toast.LENGTH_LONG
                 ).show();
@@ -41,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadItem() {
-        List<Item> list = new ArrayList<>();
+        ArrayList<Item> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             list.add(new Item("item index is : " + i));
         }
-        adapter.addAll(AdapterCompact.toItems(list));
+        adapter.addAll(AdapterUtil.toItems(list));
     }
 
     private void loadItem2() {
@@ -53,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 30; i++) {
             list.add(new ItemDataBinding("item index is : " + i));
         }
-        adapter.addAll(AdapterCompact.toItems(list));
+        adapter.addAll(AdapterUtil.toItems(list));
     }
 }

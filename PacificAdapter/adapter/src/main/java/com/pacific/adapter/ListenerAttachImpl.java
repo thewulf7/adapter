@@ -58,7 +58,7 @@ public final class ListenerAttachImpl implements ListenerAttach {
     public void attachOnClickListener(int viewId) {
         final View.OnClickListener listener = provider.getOnClickListener(item.getLayout());
         if (listener == null) return;
-        View view = AdapterCompact.findView(itemView, viewId);
+        View view = AdapterUtil.findView(itemView, viewId);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +76,7 @@ public final class ListenerAttachImpl implements ListenerAttach {
     public void attachOnTouchListener(int viewId) {
         final View.OnTouchListener listener = provider.getOnTouchListener(item.getLayout());
         if (listener == null) return;
-        View view = AdapterCompact.findView(itemView, viewId);
+        View view = AdapterUtil.findView(itemView, viewId);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -94,7 +94,7 @@ public final class ListenerAttachImpl implements ListenerAttach {
     public void attachOnLongClickListener(int viewId) {
         final View.OnLongClickListener listener = provider.getOnLongClickListener(item.getLayout());
         if (listener == null) return;
-        View view = AdapterCompact.findView(itemView, viewId);
+        View view = AdapterUtil.findView(itemView, viewId);
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -113,7 +113,7 @@ public final class ListenerAttachImpl implements ListenerAttach {
         final CompoundButton.OnCheckedChangeListener listener = provider
                 .getOnCheckedChangeListener(item.getLayout());
         if (listener == null) return;
-        CompoundButton view = AdapterCompact.findView(itemView, viewId);
+        CompoundButton view = AdapterUtil.findView(itemView, viewId);
         view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -133,7 +133,7 @@ public final class ListenerAttachImpl implements ListenerAttach {
         final RadioGroup.OnCheckedChangeListener listener = provider
                 .getGroupOnCheckedChangeListener(item.getLayout());
         if (listener == null) return;
-        RadioGroup view = AdapterCompact.findView(itemView, viewId);
+        RadioGroup view = AdapterUtil.findView(itemView, viewId);
         view.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -144,8 +144,8 @@ public final class ListenerAttachImpl implements ListenerAttach {
     }
 
     private void setTags(View view) {
-        AdapterCompact.setTag(view, position);
-        AdapterCompact.setTag(view, item);
-        AdapterCompact.setTag(view, itemView);
+        AdapterUtil.setTag(view, position);
+        AdapterUtil.setTag(view, item);
+        AdapterUtil.setTag(view, itemView);
     }
 }

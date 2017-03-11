@@ -64,7 +64,7 @@ public final class DefaultBinding {
     public <V extends View> V findView(int viewId) {
         View view = views.get(viewId);
         if (view == null) {
-            view = AdapterCompact.findView(itemView, viewId);
+            view = AdapterUtil.findView(itemView, viewId);
             views.put(viewId, view);
         }
         return (V) view;

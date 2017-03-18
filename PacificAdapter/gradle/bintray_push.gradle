@@ -5,22 +5,12 @@ apply plugin: 'com.jfrog.artifactory-upload'
 
 group = GROUP
 
-// Both the artifactory and bintray plugins depend on this singular
-// global `version` variable. As such, we need to configure it based
-// on which task we're running.
-//
-// The solution here is brittle; it just checks whether 'bintrayUpload'
-// was called for execution, otherwise it assumes SNAPSHOT. If we
-// were to wait until the task graph was built, we'd be too late
-// (the plugins would already have used `version`).
 boolean isReleaseBuild = gradle.startParameter.taskNames.contains('bintrayUpload')
 version = isReleaseBuild ? VERSION_NAME : "$VERSION_NAME-SNAPSHOT"
 logger.info("Library using version=$project.version")
 
-// Create source/javadoc artifacts for publishing
 apply from: "$rootDir/gradle/artifacts.gradle"
 
-// Configure android-maven-gradle-plugin
 install {
     repositories.mavenInstaller {
         pom {
@@ -58,26 +48,6 @@ install {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-// Configure artifactory (for publishing snapshots)
-// Based on NebulaOJOPublishingPlugin (from nebula-bintray-plugin)
-//artifactory {
-//    contextUrl = 'https://oss.jfrog.org'
-//    publish {
-//        repository {
-//            repoKey = 'oss-snapshot-local'
-//            if (properties.hasProperty("bintray.user")) {
-//                username = properties.getProperty("bintray.user")
-//                password = properties.getProperty("bintray.apikey")
-//            }
-//        }
-//
-//        defaults {
-//            publishConfigs('archives')
-//        }
-//    }
-//}
-
-// Configure gradle-bintray-plugin (for publishing releases)
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")

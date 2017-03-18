@@ -22,11 +22,19 @@ import android.view.View;
 
 public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttach {
 
+    /**
+     * binding
+     */
     private Object binding;
     /**
      * adapter position
      */
     private int position = -1;
+
+    /**
+     * adapter size
+     */
+    private int size = 0;
 
     /**
      * item
@@ -40,7 +48,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttac
 
     public ViewHolder(View itemView, ListenerProvider provider) {
         super(itemView);
-        this.listenerAttach = new ListenerAttachImpl(provider, itemView);
+        this.listenerAttach = new ListenerAttachImpl(provider, this);
         try {
             Class.forName("android.databinding.DataBindingUtil");
             binding = DataBindingUtil.bind(itemView);
@@ -53,20 +61,72 @@ public class ViewHolder extends RecyclerView.ViewHolder implements ListenerAttac
         }
     }
 
-    void setCurrentPosition(int position) {
-        this.position = position;
-        this.listenerAttach.setCurrentPosition(position);
+    /**
+     * get adapter size
+     *
+     * @return
+     */
+    public int getSize() {
+        return size;
     }
 
+    /**
+     * get item
+     *
+     * @return
+     */
+    public <V extends Item> V getItem() {
+        return (V) item;
+    }
+
+    /**
+     * is first item
+     *
+     * @return
+     */
+    public boolean isFirstItem() {
+        if (position == 0) return true;
+        return false;
+    }
+
+    /**
+     * is last item
+     *
+     * @return
+     */
+    public boolean isLastItem() {
+        if (position == size - 1) return true;
+        return false;
+    }
+
+    /**
+     * get adapter position , just used in ListView,GridView,Spinner,ViewPager
+     *
+     * @return
+     */
     public int getCurrentPosition() {
         return position;
     }
 
-    void setCurrentItem(Item item) {
-        this.item = item;
-        this.listenerAttach.setCurrentItem(item);
+    void setCurrentPosition(int position) {
+        this.position = position;
     }
 
+    void setSize(int size) {
+        this.size = size;
+    }
+
+    void setCurrentItem(Item item) {
+        this.item = item;
+    }
+
+    /**
+     * get binding,if you are using DataBinding , it will return ViewDataBinding,
+     * or it will return {@link DefaultBinding}
+     *
+     * @param <T>
+     * @return
+     */
     public <T extends Object> T binding() {
         return (T) this.binding;
     }

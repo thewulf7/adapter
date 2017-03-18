@@ -21,16 +21,47 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public interface RecyclerItem<T extends ViewHolder> extends Item<T> {
 
+    /**
+     * for DiffUtil
+     */
     AtomicLong ID_COUNTER = new AtomicLong(0);
 
+    /**
+     * bind pay loads
+     *
+     * @param holder   view holder
+     * @param payloads data
+     */
     void bindPayloads(T holder, List<Object> payloads);
 
+    /**
+     * get span size , for GridLayoutManager
+     *
+     * @param spanCount span
+     * @param position  adapter position
+     * @return
+     */
     int getSpanSize(int spanCount, int position);
 
+    /**
+     * onViewAttachedToWindow callback
+     *
+     * @param holder
+     */
     void onViewAttachedToWindow(T holder);
 
+    /**
+     * onViewDetachedFromWindow callback
+     *
+     * @param holder
+     */
     void onViewDetachedFromWindow(T holder);
 
+    /**
+     * isRecyclable callback
+     *
+     * @return
+     */
     boolean isRecyclable();
 
     /**

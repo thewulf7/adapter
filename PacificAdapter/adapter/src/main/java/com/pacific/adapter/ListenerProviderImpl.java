@@ -48,6 +48,9 @@ public final class ListenerProviderImpl implements ListenerProvider {
      */
     private SparseArray<RadioGroup.OnCheckedChangeListener> onGroupCheckedChangeListeners;
 
+    /**
+     * clear all listener
+     */
     @Override
     public void clearListeners() {
         if (onClickListeners != null) {
@@ -67,6 +70,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         }
     }
 
+    /**
+     * add OnClickListener
+     *
+     * @param layout   item layout resource id
+     * @param listener
+     */
     @Override
     public void addOnClickListener(@LayoutRes int layout, View.OnClickListener listener) {
         if (onClickListeners == null) {
@@ -75,6 +84,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         onClickListeners.put(layout, listener);
     }
 
+    /**
+     * get OnClickListener
+     *
+     * @param layout item layout resource id
+     * @return
+     */
     @Override
     public View.OnClickListener getOnClickListener(@LayoutRes int layout) {
         if (onClickListeners != null) {
@@ -83,6 +98,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         return null;
     }
 
+    /**
+     * add OnTouchListener
+     *
+     * @param layout   item layout resource id
+     * @param listener
+     */
     @Override
     public void addOnTouchListener(@LayoutRes int layout, View.OnTouchListener listener) {
         if (onTouchListeners == null) {
@@ -91,6 +112,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         onTouchListeners.put(layout, listener);
     }
 
+    /**
+     * get OnTouchListeners
+     *
+     * @param layout item layout resource id
+     * @return
+     */
     @Override
     public View.OnTouchListener getOnTouchListener(@LayoutRes int layout) {
         if (onTouchListeners != null) {
@@ -99,6 +126,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         return null;
     }
 
+    /**
+     * add OnLongClickListener
+     *
+     * @param layout   item layout resource id
+     * @param listener
+     */
     @Override
     public void addOnLongClickListener(@LayoutRes int layout, View.OnLongClickListener listener) {
         if (onLongClickListeners == null) {
@@ -107,6 +140,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         onLongClickListeners.put(layout, listener);
     }
 
+    /**
+     * get OnLongClickListener
+     *
+     * @param layout item layout resource id
+     * @return
+     */
     @Override
     public View.OnLongClickListener getOnLongClickListener(@LayoutRes int layout) {
         if (onLongClickListeners != null) {
@@ -115,6 +154,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         return null;
     }
 
+    /**
+     * add CompoundButton.OnCheckedChangeListener
+     *
+     * @param layout   item layout resource id
+     * @param listener
+     */
     @Override
     public void addOnCheckedChangeListener(@LayoutRes int layout,
                                            CompoundButton.OnCheckedChangeListener listener) {
@@ -124,6 +169,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         onCheckedChangeListeners.put(layout, listener);
     }
 
+    /**
+     * get CompoundButton.OnCheckedChangeListener
+     *
+     * @param layout item layout resource id
+     * @return
+     */
     @Override
     public CompoundButton.OnCheckedChangeListener getOnCheckedChangeListener(@LayoutRes int layout) {
         if (onCheckedChangeListeners != null) {
@@ -132,6 +183,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         return null;
     }
 
+    /**
+     * add RadioGroup.OnCheckedChangeListener
+     *
+     * @param layout   item layout resource id
+     * @param listener
+     */
     @Override
     public void addGroupOnCheckedChangeListener(@LayoutRes int layout,
                                                 RadioGroup.OnCheckedChangeListener listener) {
@@ -141,6 +198,12 @@ public final class ListenerProviderImpl implements ListenerProvider {
         onGroupCheckedChangeListeners.put(layout, listener);
     }
 
+    /**
+     * get RadioGroup.OnCheckedChangeListener
+     *
+     * @param layout item layout resource id
+     * @return
+     */
     @Override
     public RadioGroup.OnCheckedChangeListener getGroupOnCheckedChangeListener(@LayoutRes int layout) {
         if (onGroupCheckedChangeListeners != null) {

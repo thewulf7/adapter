@@ -211,11 +211,12 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
             }
             convertView = inflater.inflate(item.getLayout(), container, false);
             holder = createViewHolder(convertView);
-            convertView.setTag(R.integer.adapter_view_holder, holder);
+            convertView.setTag(R.integer.adapter_holder, holder);
         } else {
-            holder = (H) convertView.getTag(R.integer.adapter_view_holder);
+            holder = (H) convertView.getTag(R.integer.adapter_holder);
         }
         holder.setCurrentPosition(position);
+        holder.setSize(size());
         holder.setCurrentItem(item);
         item.bind(holder);
         container.addView(convertView);
@@ -227,7 +228,7 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
         if (object instanceof View) {
             View view = (View) object;
             T item = get(position);
-            ViewHolder holder = (ViewHolder) view.getTag(R.integer.adapter_view_holder);
+            ViewHolder holder = (ViewHolder) view.getTag(R.integer.adapter_holder);
             item.unbind(holder);
             container.removeView(view);
             cacheViews.add(view);
@@ -330,10 +331,10 @@ public abstract class BasePagerAdapter2<T extends Item, H extends ViewHolder>
     }
 
     /**
-     * create SimpleViewHolder
+     * create ViewHolder
      *
      * @param convertView item view
-     * @return SimpleViewHolder
+     * @return ViewHolder
      */
     protected abstract H createViewHolder(View convertView);
 }

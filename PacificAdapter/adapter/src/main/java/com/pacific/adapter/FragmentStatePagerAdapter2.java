@@ -22,7 +22,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 public abstract class FragmentStatePagerAdapter2 extends FragmentStatePagerAdapter {
+    /**
+     * current fragment position
+     */
     protected int currentPosition = -1;
+
+    /**
+     * current fragment
+     */
     protected Fragment currentFragment;
 
     public FragmentStatePagerAdapter2(FragmentManager fm) {
@@ -38,10 +45,20 @@ public abstract class FragmentStatePagerAdapter2 extends FragmentStatePagerAdapt
         }
     }
 
+    /**
+     * get current fragment position
+     *
+     * @return
+     */
     public int getCurrentPosition() {
         return currentPosition;
     }
 
+    /**
+     * get current fragment
+     *
+     * @return
+     */
     public Fragment getCurrentFragment() {
         return currentFragment;
     }

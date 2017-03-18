@@ -33,6 +33,12 @@ public final class PagerAdapter2 extends BasePagerAdapter2<Item, ViewHolder> {
         super(data);
     }
 
+    /**
+     * create ViewHolder
+     *
+     * @param convertView item view
+     * @return ViewHolder
+     */
     @Override
     protected ViewHolder createViewHolder(View convertView) {
         return new ViewHolder(convertView, this);

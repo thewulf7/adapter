@@ -65,7 +65,7 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
     public void onViewRecycled(H holder) {
         int position = holder.getAdapterPosition();
         if (position != RecyclerView.NO_POSITION) {
-            H helper = (H) holder.itemView.getTag(R.integer.adapter_view_holder);
+            H helper = (H) holder.itemView.getTag(R.integer.adapter_holder);
             get(position).unbind(helper);
             return;
         }
@@ -76,7 +76,7 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
     public void onViewAttachedToWindow(H holder) {
         int position = holder.getAdapterPosition();
         if (position != RecyclerView.NO_POSITION) {
-            H helper = (H) holder.itemView.getTag(R.integer.adapter_view_holder);
+            H helper = (H) holder.itemView.getTag(R.integer.adapter_holder);
             get(position).onViewAttachedToWindow(helper);
             return;
         }
@@ -86,7 +86,7 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
     public void onViewDetachedFromWindow(H holder) {
         int position = holder.getAdapterPosition();
         if (position != RecyclerView.NO_POSITION) {
-            H helper = (H) holder.itemView.getTag(R.integer.adapter_view_holder);
+            H helper = (H) holder.itemView.getTag(R.integer.adapter_holder);
             get(position).onViewDetachedFromWindow(helper);
             return;
         }
@@ -109,6 +109,7 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
     public void onBindViewHolder(H holder, int position, List<Object> payloads) {
         T item = get(position);
         holder.setCurrentPosition(position);
+        holder.setSize(size());
         holder.setCurrentItem(item);
         if (payloads.isEmpty()) {
             item.bind(holder);
@@ -316,28 +317,6 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
         return data.subList(fromIndex, toIndex);
     }
 
-    private ListUpdateCallback listUpdateCallback = new ListUpdateCallback() {
-        @Override
-        public void onInserted(int position, int count) {
-            notifyItemRangeInserted(position, count);
-        }
-
-        @Override
-        public void onRemoved(int position, int count) {
-            notifyItemRangeRemoved(position, count);
-        }
-
-        @Override
-        public void onMoved(int fromPosition, int toPosition) {
-            notifyItemMoved(fromPosition, toPosition);
-        }
-
-        @Override
-        public void onChanged(int position, int count, Object payload) {
-            notifyItemRangeChanged(position, count);
-        }
-    };
-
     @Override
     public void clearListeners() {
         provider.clearListeners();
@@ -394,6 +373,28 @@ public abstract class BaseRecyclerAdapter<T extends RecyclerItem, H extends View
     public RadioGroup.OnCheckedChangeListener getGroupOnCheckedChangeListener(@LayoutRes int layout) {
         return provider.getGroupOnCheckedChangeListener(layout);
     }
+
+    private ListUpdateCallback listUpdateCallback = new ListUpdateCallback() {
+        @Override
+        public void onInserted(int position, int count) {
+            notifyItemRangeInserted(position, count);
+        }
+
+        @Override
+        public void onRemoved(int position, int count) {
+            notifyItemRangeRemoved(position, count);
+        }
+
+        @Override
+        public void onMoved(int fromPosition, int toPosition) {
+            notifyItemMoved(fromPosition, toPosition);
+        }
+
+        @Override
+        public void onChanged(int position, int count, Object payload) {
+            notifyItemRangeChanged(position, count);
+        }
+    };
 
     private class UpdatingCallback extends DiffUtil.Callback {
 

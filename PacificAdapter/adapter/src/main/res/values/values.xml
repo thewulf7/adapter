@@ -1,6 +1,3 @@
 <resources>
-    <item name="adapter_view_holder" type="integer"></item>
-    <item name="adapter_item" type="integer"></item>
-    <item name="adapter_position" type="integer"></item>
-    <item name="adapter_item_view" type="integer"></item>
+    <item name="adapter_holder" type="integer"></item>
 </resources>

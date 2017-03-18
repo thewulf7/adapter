@@ -1,8 +1,8 @@
 package com.example.demo.entity;
 
 import com.example.demo.R;
-import com.pacific.adapter.SimpleItem;
 import com.pacific.adapter.DefaultBinding;
+import com.pacific.adapter.SimpleItem;
 import com.pacific.adapter.ViewHolder;
 
 public class Item extends SimpleItem {

@@ -94,7 +94,6 @@ public interface ListenerProvider {
      */
     OnCheckedChangeListener getOnCheckedChangeListener(@LayoutRes int layout);
 
-
     /**
      * add RadioGroup.OnCheckedChangeListener
      *

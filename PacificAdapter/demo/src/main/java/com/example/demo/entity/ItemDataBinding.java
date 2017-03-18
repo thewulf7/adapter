@@ -21,5 +21,6 @@ public class ItemDataBinding extends SimpleItem {
     public void bind(ViewHolder holder) {
         ItemDataBindingBinding binding = holder.binding();
         binding.text.setText(title);
+        holder.attachOnClickListener(R.id.text);
     }
 }

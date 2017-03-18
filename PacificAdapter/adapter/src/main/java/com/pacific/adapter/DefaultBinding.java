@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.pacific.adapter;
 
 import android.content.Context;
@@ -371,9 +372,9 @@ public final class DefaultBinding {
     /**
      * get Context of the item view
      *
-     * @return
+     * @return context
      */
-    public Context getContext() {
+    public Context context() {
         return itemView.getContext();
     }
 }

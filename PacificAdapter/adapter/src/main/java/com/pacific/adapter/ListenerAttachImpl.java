@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.pacific.adapter;
 
 import android.support.annotation.IdRes;
@@ -6,48 +22,20 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 
-public final class ListenerAttachImpl implements ListenerAttach {
+final class ListenerAttachImpl implements ListenerAttach {
     /**
      * listeners provider
      */
     private final ListenerProvider provider;
 
     /**
-     * item view
+     * holder
      */
-    private final View itemView;
+    private final ViewHolder holder;
 
-    /**
-     * adapter position
-     */
-    private int position = -1;
-
-    /**
-     * item
-     */
-    private Item item;
-
-    public ListenerAttachImpl(ListenerProvider provider, View itemView) {
+    public ListenerAttachImpl(ListenerProvider provider, ViewHolder holder) {
         this.provider = provider;
-        this.itemView = itemView;
-    }
-
-    /**
-     * set adapter position
-     *
-     * @param position
-     */
-    public void setCurrentPosition(int position) {
-        this.position = position;
-    }
-
-    /**
-     * set item
-     *
-     * @param item
-     */
-    public void setCurrentItem(Item item) {
-        this.item = item;
+        this.holder = holder;
     }
 
     /**
@@ -56,13 +44,14 @@ public final class ListenerAttachImpl implements ListenerAttach {
      * @param viewId view id
      */
     public void attachOnClickListener(int viewId) {
-        final View.OnClickListener listener = provider.getOnClickListener(item.getLayout());
+        int layout = holder.getItem().getLayout();
+        final View.OnClickListener listener = provider.getOnClickListener(layout);
         if (listener == null) return;
-        View view = AdapterUtil.findView(itemView, viewId);
+        View view = AdapterUtil.findView(holder.itemView, viewId);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTags(v);
+                v.setTag(R.integer.adapter_holder, holder);
                 listener.onClick(v);
             }
         });
@@ -74,13 +63,14 @@ public final class ListenerAttachImpl implements ListenerAttach {
      * @param viewId view id
      */
     public void attachOnTouchListener(int viewId) {
-        final View.OnTouchListener listener = provider.getOnTouchListener(item.getLayout());
+        int layout = holder.getItem().getLayout();
+        final View.OnTouchListener listener = provider.getOnTouchListener(layout);
         if (listener == null) return;
-        View view = AdapterUtil.findView(itemView, viewId);
+        View view = AdapterUtil.findView(holder.itemView, viewId);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                setTags(v);
+                v.setTag(R.integer.adapter_holder, holder);
                 return listener.onTouch(v, event);
             }
         });
@@ -92,13 +82,14 @@ public final class ListenerAttachImpl implements ListenerAttach {
      * @param viewId view id
      */
     public void attachOnLongClickListener(int viewId) {
-        final View.OnLongClickListener listener = provider.getOnLongClickListener(item.getLayout());
+        int layout = holder.getItem().getLayout();
+        final View.OnLongClickListener listener = provider.getOnLongClickListener(layout);
         if (listener == null) return;
-        View view = AdapterUtil.findView(itemView, viewId);
+        View view = AdapterUtil.findView(holder.itemView, viewId);
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                setTags(v);
+                v.setTag(R.integer.adapter_holder, holder);
                 return listener.onLongClick(v);
             }
         });
@@ -110,19 +101,19 @@ public final class ListenerAttachImpl implements ListenerAttach {
      * @param viewId CompoundButton view id
      */
     public void attachOnCheckedChangeListener(int viewId) {
+        int layout = holder.getItem().getLayout();
         final CompoundButton.OnCheckedChangeListener listener = provider
-                .getOnCheckedChangeListener(item.getLayout());
+                .getOnCheckedChangeListener(layout);
         if (listener == null) return;
-        CompoundButton view = AdapterUtil.findView(itemView, viewId);
+        CompoundButton view = AdapterUtil.findView(holder.itemView, viewId);
         view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setTags(buttonView);
+                buttonView.setTag(R.integer.adapter_holder, holder);
                 listener.onCheckedChanged(buttonView, isChecked);
             }
         });
     }
-
 
     /**
      * set RadioGroup.OnCheckedChangeListener for RadioGroup
@@ -130,22 +121,17 @@ public final class ListenerAttachImpl implements ListenerAttach {
      * @param viewId RadioGroup view id
      */
     public void attachGroupOnCheckedChangeListener(int viewId) {
+        int layout = holder.getItem().getLayout();
         final RadioGroup.OnCheckedChangeListener listener = provider
-                .getGroupOnCheckedChangeListener(item.getLayout());
+                .getGroupOnCheckedChangeListener(layout);
         if (listener == null) return;
-        RadioGroup view = AdapterUtil.findView(itemView, viewId);
+        RadioGroup view = AdapterUtil.findView(holder.itemView, viewId);
         view.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                setTags(group);
+                group.setTag(R.integer.adapter_holder, holder);
                 listener.onCheckedChanged(group, checkedId);
             }
         });
-    }
-
-    private void setTags(View view) {
-        AdapterUtil.setTag(view, position);
-        AdapterUtil.setTag(view, item);
-        AdapterUtil.setTag(view, itemView);
     }
 }

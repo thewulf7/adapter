@@ -41,6 +41,9 @@ public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
     protected OnDataSetChanged onDataSetChanged;
     protected ListenerProviderImpl provider;
 
+    /**
+     * default 1 view type
+     */
     public BaseAbsAdapter() {
         this(1);
     }
@@ -90,11 +93,12 @@ public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
             }
             convertView = inflater.inflate(item.getLayout(), parent, false);
             holder = createViewHolder(convertView);
-            convertView.setTag(R.integer.adapter_view_holder, holder);
+            convertView.setTag(R.integer.adapter_holder, holder);
         } else {
-            holder = (H) convertView.getTag(R.integer.adapter_view_holder);
+            holder = (H) convertView.getTag(R.integer.adapter_holder);
         }
         holder.setCurrentPosition(position);
+        holder.setSize(size());
         holder.setCurrentItem(item);
         item.bind(holder);
         return convertView;
@@ -327,10 +331,10 @@ public abstract class BaseAbsAdapter<T extends Item, H extends ViewHolder>
     }
 
     /**
-     * create SimpleViewHolder
+     * create ViewHolder
      *
      * @param convertView item view
-     * @return SimpleViewHolder
+     * @return ViewHolder
      */
     protected abstract H createViewHolder(View convertView);
 }
